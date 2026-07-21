@@ -1,39 +1,84 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { supabase } from '../lib/supabase'
+import { useAuth } from '../lib/auth'
+import './auth.css'
 
-export default function RegisterPage() {
+function scorePassword(pw: string): number {
+  let score = 0
+  if (pw.length >= 8) score++
+  if (pw.length >= 12) score++
+  if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++
+  if (/\d/.test(pw)) score++
+  if (/[^A-Za-z0-9]/.test(pw)) score++
+  return Math.min(score, 4)
+}
+
+const STRENGTH_LABELS = ['Muito fraca', 'Fraca', 'Média', 'Forte', 'Muito forte']
+const STRENGTH_COLORS = ['#dc2626', '#dc2626', '#d97706', '#16a34a', '#16a34a']
+
+export function RegisterPage() {
+  const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const { signUp } = useAuth()
   const navigate = useNavigate()
+
+  const pwScore = scorePassword(password)
+  const pwStrength = password.length > 0 ? STRENGTH_LABELS[pwScore] : ''
+  const pwColor = password.length > 0 ? STRENGTH_COLORS[pwScore] : 'transparent'
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setError(null)
+    setError('')
     if (password !== confirm) { setError('As senhas não coincidem.'); return }
+    if (pwScore < 2) { setError('Senha muito fraca. Use ao menos 8 caracteres, com maiúsculas, minúsculas e números.'); return }
     setLoading(true)
-    const { error } = await supabase.auth.signUp({ email, password })
-    if (error) { setError(error.message); setLoading(false); return }
-    navigate('/conta')
+    const { error } = await signUp(email, password, fullName)
+    setLoading(false)
+    if (error) { setError(error); return }
+    navigate(`/verificar-email?email=${encodeURIComponent(email)}`)
   }
 
   return (
-    <div className="mx-auto max-w-md px-4 py-16">
-      <h1 className="text-center font-display text-4xl font-bold text-secondary-900">Criar conta</h1>
-      <p className="mt-2 text-center text-neutral-500">Junte-se ao PapoDetailer</p>
-
-      <form onSubmit={handleSubmit} className="mt-8 space-y-4 rounded-2xl border border-neutral-200 bg-white p-6">
-        <div><label className="text-sm font-medium text-secondary-900">Email</label><input required type="email" value={email} onChange={e => setEmail(e.target.value)} className="mt-1 w-full rounded-lg border border-neutral-300 p-2.5 text-sm outline-none focus:border-primary-400" /></div>
-        <div><label className="text-sm font-medium text-secondary-900">Senha</label><input required type="password" value={password} onChange={e => setPassword(e.target.value)} className="mt-1 w-full rounded-lg border border-neutral-300 p-2.5 text-sm outline-none focus:border-primary-400" /></div>
-        <div><label className="text-sm font-medium text-secondary-900">Confirmar senha</label><input required type="password" value={confirm} onChange={e => setConfirm(e.target.value)} className="mt-1 w-full rounded-lg border border-neutral-300 p-2.5 text-sm outline-none focus:border-primary-400" /></div>
-        {error && <p className="text-sm text-error-600">{error}</p>}
-        <button type="submit" disabled={loading} className="w-full rounded-full bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:shadow-lg disabled:opacity-50">{loading ? 'Criando...' : 'Criar conta'}</button>
+    <div className="auth-page">
+      <form className="auth-card" onSubmit={handleSubmit}>
+        <h1>Criar conta</h1>
+        <p className="auth-sub">Junte-se ao Universo Detail para comentar e avaliar produtos.</p>
+        {error && <div className="auth-error">{error}</div>}
+        <div className="auth-form">
+          <div className="auth-field">
+            <label>Nome completo</label>
+            <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Seu nome completo" required />
+          </div>
+          <div className="auth-field">
+            <label>E-mail</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="voce@email.com" required />
+          </div>
+          <div className="auth-field">
+            <label>Senha</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mínimo 8 caracteres" required minLength={8} />
+            {password && (
+              <>
+                <div className="auth-pw-strength">
+                  <div className="auth-pw-strength-bar" style={{ width: `${(pwScore / 4) * 100}%`, background: pwColor }} />
+                </div>
+                <span style={{ fontSize: 11, color: pwColor }}>{pwStrength}</span>
+              </>
+            )}
+          </div>
+          <div className="auth-field">
+            <label>Confirmar senha</label>
+            <input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} placeholder="Repita a senha" required />
+          </div>
+          <button type="submit" className="btn btn-primary auth-submit" disabled={loading}>
+            {loading ? 'Criando...' : 'Criar conta'}
+          </button>
+        </div>
+        <p className="auth-link">Já tem conta? <Link to="/login">Entrar</Link></p>
       </form>
-
-      <p className="mt-6 text-center text-sm text-neutral-500">Já tem conta? <Link to="/login" className="text-primary-600 hover:text-primary-700">Entrar</Link></p>
     </div>
   )
 }

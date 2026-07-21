@@ -15,6 +15,10 @@ import { CategoryPage } from './pages/CategoryPage'
 import { BrandPage } from './pages/BrandPage'
 import { BrandsPage } from './pages/BrandsPage'
 import { LoginPage } from './pages/LoginPage'
+import { RegisterPage } from './pages/RegisterPage'
+import { VerifyEmailPage } from './pages/VerifyEmailPage'
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage'
+import { ResetPasswordPage } from './pages/ResetPasswordPage'
 import { AdminDashboardPage } from './pages/admin/AdminDashboardPage'
 import { AdminProductsPage } from './pages/admin/AdminProductsPage'
 import { AdminBrandsPage } from './pages/admin/AdminBrandsPage'
@@ -66,6 +70,10 @@ const router = createBrowserRouter([
       { path: '/marca/:slug', element: <BrandPage /> },
       { path: '/marcas', element: <BrandsPage /> },
       { path: '/login', element: <LoginPage /> },
+      { path: '/cadastro', element: <RegisterPage /> },
+      { path: '/verificar-email', element: <VerifyEmailPage /> },
+      { path: '/esqueci-senha', element: <ForgotPasswordPage /> },
+      { path: '/redefinir-senha', element: <ResetPasswordPage /> },
       {
         element: <ProtectedAdmin />,
         children: [

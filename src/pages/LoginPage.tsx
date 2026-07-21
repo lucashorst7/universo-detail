@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
 import './login.css'
 
@@ -38,6 +38,10 @@ export function LoginPage() {
         <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%', justifyContent: 'center' }}>
           {loading ? 'Entrando...' : 'Entrar'}
         </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, textAlign: 'center', marginTop: 4 }}>
+          <Link to="/esqueci-senha" style={{ fontSize: 13, color: 'var(--color-text-2)' }}>Esqueceu a senha?</Link>
+          <Link to="/cadastro" style={{ fontSize: 13, color: 'var(--color-primary)', fontWeight: 600 }}>Criar conta</Link>
+        </div>
       </form>
     </div>
   )
