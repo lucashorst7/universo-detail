@@ -85,6 +85,7 @@ export interface UserProfile {
   favorite_wax: string | null
   favorite_tire_dressing: string | null
   favorite_brand_id: string | null
+  email_verified: boolean
 }
 
 export interface AdminUser {
