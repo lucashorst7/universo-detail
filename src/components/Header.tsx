@@ -47,7 +47,10 @@ export function Header({ categories }: { categories: Category[] }) {
   return (
     <header className="app-header">
       <div className="container header-inner">
-        <Link to="/" className="header-logo">Universo Detail</Link>
+        <Link to="/" className="header-logo">
+          <img src="/13_universo_carro_luxo_header-removebg-preview%20copy%20copy.png" alt="Universo Detail" className="header-logo-img" />
+          <span className="header-logo-text">Universo Detail</span>
+        </Link>
         <nav className="header-nav">
           <Link to="/" className="nav-link">Início</Link>
           <div

@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div className="footer-col">
-          <h4>Universo Detail</h4>
+          <img src="/13_universo_carro_luxo_header-removebg-preview%20copy%20copy.png" alt="Universo Detail" className="footer-logo-img" />
           <p className="footer-desc">A biblioteca de produtos para estética automotiva. Encontre os melhores produtos, marcas e categorias para o cuidado do seu veículo.</p>
         </div>
         <div className="footer-col">

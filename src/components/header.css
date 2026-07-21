@@ -1,6 +1,8 @@
 .app-header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); }
 .header-inner { display: flex; align-items: center; gap: 20px; height: 64px; }
-.header-logo { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; color: var(--color-text); white-space: nowrap; }
+.header-logo { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; letter-spacing: -0.02em; color: var(--color-text); white-space: nowrap; }
+.header-logo-img { height: 40px; width: auto; object-fit: contain; }
+.header-logo-text { background: linear-gradient(135deg, #f5d76e 0%, #d4af37 40%, #b8962e 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .header-nav { display: flex; align-items: center; gap: 4px; }
 .nav-link { padding: 8px 12px; font-size: 14px; font-weight: 500; color: var(--color-text-2); border-radius: var(--radius-md); transition: color 0.15s, background 0.15s; }
 .nav-link:hover { color: var(--color-text); background: var(--color-surface); }
