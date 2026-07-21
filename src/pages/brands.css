@@ -1,0 +1,6 @@
+.brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.brand-card { display: flex; flex-direction: column; gap: 6px; padding: 20px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); transition: all 0.2s; }
+.brand-card:hover { border-color: var(--color-primary); transform: translateY(-2px); }
+.brand-card h3 { font-size: 18px; font-weight: 700; }
+.brand-country { font-size: 12px; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.brand-card p { font-size: 13px; color: var(--color-text-2); line-height: 1.5; }
