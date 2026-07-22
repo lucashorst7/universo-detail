@@ -1,11 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Package, Tag, Users } from 'lucide-react'
+import { ArrowRight, Package, Tag, Users, Droplet, Armchair, Shield, Eye, Sparkles, CircleDot, Wrench, SprayCan, type LucideIcon } from 'lucide-react'
 import { fetchCategories, fetchProducts, fetchBrands, fetchSiteCounts } from '../lib/queries'
 import { ProductCard } from '../components/ProductCard'
 import { Spinner } from '../components/Feedback'
 import type { Category, Brand, ProductWithRelations } from '../types/database'
 import './home.css'
+
+const iconMap: Record<string, LucideIcon> = {
+  'drop': Droplet,
+  'armchair': Armchair,
+  'shield': Shield,
+  'eye': Eye,
+  'sparkle': Sparkles,
+  'tire': CircleDot,
+  'gear': Wrench,
+  'spray-bottle': SprayCan,
+  'droplet': Droplet,
+  'sparkles': Sparkles,
+  'spray-can': SprayCan,
+  'package': Package,
+}
 
 export function HomePage() {
   const [categories, setCategories] = useState<Category[]>([])
@@ -78,12 +93,15 @@ export function HomePage() {
           <Link to="/produtos" className="section-link">Ver tudo <ArrowRight size={16} /></Link>
         </div>
         <div className="cat-grid">
-          {categories.slice(0, 8).map((c) => (
-            <Link key={c.id} to={`/categoria/${c.slug}`} className="cat-card">
-              {c.icon && <span className="cat-card-icon">{c.icon}</span>}
-              <span className="cat-card-name">{c.name}</span>
-            </Link>
-          ))}
+          {categories.slice(0, 8).map((c) => {
+            const Icon = iconMap[c.icon ?? ''] ?? Package
+            return (
+              <Link key={c.id} to={`/categoria/${c.slug}`} className="cat-card">
+                <span className="cat-card-icon"><Icon size={24} /></span>
+                <span className="cat-card-name">{c.name}</span>
+              </Link>
+            )
+          })}
         </div>
       </section>
 
