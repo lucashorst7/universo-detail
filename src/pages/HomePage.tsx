@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
-import { Package, Tag, UsersThree, type Icon as PhosphorIcon } from '@phosphor-icons/react'
-import { getCategoryIcon } from '../components/categoryIcons'
+import { ArrowRight, Package, Tag, Users } from 'lucide-react'
 import { fetchCategories, fetchProducts, fetchBrands, fetchSiteCounts } from '../lib/queries'
 import { ProductCard } from '../components/ProductCard'
 import { Spinner } from '../components/Feedback'
@@ -56,17 +54,17 @@ export function HomePage() {
           <p className="hero-tagline">A biblioteca de produtos para estética automotiva</p>
           <div className="hero-stats">
             <div className="hero-stat">
-              <Package size={24} weight="regular" className="hero-stat-icon" />
+              <Package size={24} className="hero-stat-icon" />
               <AnimatedCounter target={counts.products} />
               <span className="hero-stat-label">Produtos Cadastrados</span>
             </div>
             <div className="hero-stat">
-              <Tag size={24} weight="regular" className="hero-stat-icon" />
+              <Tag size={24} className="hero-stat-icon" />
               <AnimatedCounter target={counts.brands} />
               <span className="hero-stat-label">Marcas Cadastradas</span>
             </div>
             <div className="hero-stat">
-              <UsersThree size={24} weight="regular" className="hero-stat-icon" />
+              <Users size={24} className="hero-stat-icon" />
               <AnimatedCounter target={counts.users} />
               <span className="hero-stat-label">Usuários Registrados</span>
             </div>
@@ -80,15 +78,12 @@ export function HomePage() {
           <Link to="/produtos" className="section-link">Ver tudo <ArrowRight size={16} /></Link>
         </div>
         <div className="cat-grid">
-          {categories.slice(0, 8).map((c) => {
-            const Icon = getCategoryIcon(c.icon)
-            return (
-              <Link key={c.id} to={`/categoria/${c.slug}`} className="cat-card">
-                <Icon size={28} weight="regular" className="cat-card-icon" />
-                <span className="cat-card-name">{c.name}</span>
-              </Link>
-            )
-          })}
+          {categories.slice(0, 8).map((c) => (
+            <Link key={c.id} to={`/categoria/${c.slug}`} className="cat-card">
+              {c.icon && <span className="cat-card-icon">{c.icon}</span>}
+              <span className="cat-card-name">{c.name}</span>
+            </Link>
+          ))}
         </div>
       </section>
 
