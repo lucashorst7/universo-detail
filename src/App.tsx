@@ -1,60 +1,99 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import HomePage from './pages/HomePage'
-import CategoryPage from './pages/CategoryPage'
-import ProductPage from './pages/ProductPage'
-import BrandPage from './pages/BrandPage'
-import BrandsPage from './pages/BrandsPage'
-import CollectionsPage from './pages/CollectionsPage'
-import GuidesPage from './pages/GuidesPage'
-import KitBuilderPage from './pages/KitBuilderPage'
-import SearchPage from './pages/SearchPage'
-import AboutPage from './pages/AboutPage'
-import ContactPage from './pages/ContactPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import ProfilePage from './pages/ProfilePage'
-import AdminLayout from './components/AdminLayout'
-import AdminDashboard from './pages/admin/AdminDashboard'
-import AdminProducts from './pages/admin/AdminProducts'
-import AdminBrands from './pages/admin/AdminBrands'
-import AdminCategories from './pages/admin/AdminCategories'
-import AdminReviews from './pages/admin/AdminReviews'
+import { useEffect, useState } from 'react'
+import { createBrowserRouter, RouterProvider, Outlet, Link } from 'react-router-dom'
+import { AuthProvider, useAuth } from './lib/auth'
+import { fetchCategories } from './lib/queries'
+import { Header } from './components/Header'
+import { Footer } from './components/Footer'
+import { Spinner } from './components/Feedback'
+import { AdminLayout } from './components/AdminLayout'
+import type { Category } from './types/database'
+
+import { HomePage } from './pages/HomePage'
+import { ProductsPage } from './pages/ProductsPage'
+import { ProductDetailPage } from './pages/ProductDetailPage'
+import { CategoryPage } from './pages/CategoryPage'
+import { BrandPage } from './pages/BrandPage'
+import { BrandsPage } from './pages/BrandsPage'
+import { LoginPage } from './pages/LoginPage'
+import { RegisterPage } from './pages/RegisterPage'
+import { VerifyEmailPage } from './pages/VerifyEmailPage'
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage'
+import { ResetPasswordPage } from './pages/ResetPasswordPage'
+import { AdminDashboardPage } from './pages/admin/AdminDashboardPage'
+import { AdminProductsPage } from './pages/admin/AdminProductsPage'
+import { AdminBrandsPage } from './pages/admin/AdminBrandsPage'
+import { AdminCategoriesPage } from './pages/admin/AdminCategoriesPage'
+import { AdminReviewsPage } from './pages/admin/AdminReviewsPage'
+import { AdminMembersPage } from './pages/admin/AdminMembersPage'
+
+function Layout() {
+  const [categories, setCategories] = useState<Category[]>([])
+  const { loading } = useAuth()
+
+  useEffect(() => { fetchCategories().then(setCategories) }, [])
+
+  if (loading) return <Spinner label="Carregando..." />
+
+  return (
+    <div className="app-shell">
+      <Header categories={categories} />
+      <main className="app-main"><Outlet /></main>
+      <Footer />
+    </div>
+  )
+}
+
+function ProtectedAdmin() {
+  const { session, isAdmin, loading } = useAuth()
+  if (loading) return <Spinner label="Carregando..." />
+  if (!session) return <LoginPage />
+  if (!isAdmin) {
+    return (
+      <div className="container" style={{ padding: '60px 24px', textAlign: 'center' }}>
+        <h2>Acesso restrito</h2>
+        <p style={{ color: 'var(--color-text-2)', marginTop: 8 }}>Você não tem permissão para acessar esta área.</p>
+        <Link to="/" className="btn btn-outline" style={{ marginTop: 16 }}>Voltar ao início</Link>
+      </div>
+    )
+  }
+  return <AdminLayout />
+}
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      { path: '/', element: <HomePage /> },
+      { path: '/produtos', element: <ProductsPage /> },
+      { path: '/produto/:slug', element: <ProductDetailPage /> },
+      { path: '/categoria/:slug', element: <CategoryPage /> },
+      { path: '/marca/:slug', element: <BrandPage /> },
+      { path: '/marcas', element: <BrandsPage /> },
+      { path: '/login', element: <LoginPage /> },
+      { path: '/cadastro', element: <RegisterPage /> },
+      { path: '/verificar-email', element: <VerifyEmailPage /> },
+      { path: '/esqueci-senha', element: <ForgotPasswordPage /> },
+      { path: '/redefinir-senha', element: <ResetPasswordPage /> },
+      {
+        element: <ProtectedAdmin />,
+        children: [
+          { path: '/admin', element: <AdminDashboardPage /> },
+          { path: '/admin/produtos', element: <AdminProductsPage /> },
+          { path: '/admin/marcas', element: <AdminBrandsPage /> },
+          { path: '/admin/categorias', element: <AdminCategoriesPage /> },
+          { path: '/admin/avaliacoes', element: <AdminReviewsPage /> },
+          { path: '/admin/membros', element: <AdminMembersPage /> },
+        ],
+      },
+      { path: '*', element: <ProductsPage /> },
+    ],
+  },
+])
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <div className="app">
-        <Header />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/categoria/:slug" element={<CategoryPage />} />
-            <Route path="/produto/:slug" element={<ProductPage />} />
-            <Route path="/marca/:slug" element={<BrandPage />} />
-            <Route path="/marcas" element={<BrandsPage />} />
-            <Route path="/colecoes" element={<CollectionsPage />} />
-            <Route path="/colecoes/:slug" element={<CollectionsPage />} />
-            <Route path="/guias" element={<GuidesPage />} />
-            <Route path="/guias/:slug" element={<GuidesPage />} />
-            <Route path="/kit-builder" element={<KitBuilderPage />} />
-            <Route path="/busca" element={<SearchPage />} />
-            <Route path="/sobre" element={<AboutPage />} />
-            <Route path="/contato" element={<ContactPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/cadastro" element={<RegisterPage />} />
-            <Route path="/perfil" element={<ProfilePage />} />
-            <Route path="/admin" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
-            <Route path="/admin/produtos" element={<AdminLayout><AdminProducts /></AdminLayout>} />
-            <Route path="/admin/marcas" element={<AdminLayout><AdminBrands /></AdminLayout>} />
-            <Route path="/admin/categorias" element={<AdminLayout><AdminCategories /></AdminLayout>} />
-            <Route path="/admin/reviews" element={<AdminLayout><AdminReviews /></AdminLayout>} />
-            <Route path="/admin/guia-editorial" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   )
 }
