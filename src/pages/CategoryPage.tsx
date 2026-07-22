@@ -1,48 +1,35 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { fetchCategoryBySlug, fetchProductsByCategory, fetchBrands } from '../lib/queries'
-import type { Category, Product, Brand } from '../lib/supabase'
-import ProductCard from '../components/ProductCard'
-import { getCategoryIcon } from '../components/categoryIcons'
-import { ArrowLeft } from '@phosphor-icons/react'
+import { useParams } from 'react-router-dom'
+import { fetchProductsByCategory } from '../lib/queries'
+import { ProductCard } from '../components/ProductCard'
+import { Spinner, EmptyState } from '../components/Feedback'
+import type { ProductWithRelations } from '../types/database'
+import './products.css'
 
-export default function CategoryPage() {
-  const { slug } = useParams<{ slug: string }>()
-  const [category, setCategory] = useState<Category | null>(null)
-  const [products, setProducts] = useState<Product[]>([])
-  const [brands, setBrands] = useState<Brand[]>([])
+export function CategoryPage() {
+  const { slug } = useParams()
+  const [products, setProducts] = useState<ProductWithRelations[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!slug) return
     setLoading(true)
-    Promise.all([fetchCategoryBySlug(slug), fetchProductsByCategory(slug), fetchBrands()])
-      .then(([cat, prods, brs]) => { setCategory(cat); setProducts(prods); setBrands(brs) })
-      .finally(() => setLoading(false))
+    fetchProductsByCategory(slug).then((d) => { setProducts(d); setLoading(false) })
   }, [slug])
 
-  if (loading) return <div className="page-loading">Carregando...</div>
-  if (!category) return <div className="page-loading">Categoria não encontrada</div>
-  const Icon = getCategoryIcon(category.icon)
+  if (loading) return <Spinner label="Carregando..." />
 
   return (
-    <div className="container page">
-      <Link to="/" className="back-link"><ArrowLeft size={16} /> Início</Link>
-      <div className="page-header">
-        <div className="page-header-icon"><Icon size={40} weight="regular" /></div>
-        <div>
-          <h1>{category.name}</h1>
-          {category.description && <p className="page-subtitle">{category.description}</p>}
-        </div>
+    <div className="container products-page">
+      <div className="products-head">
+        <h1>Categoria</h1>
+        <p>{products.length} {products.length === 1 ? 'produto' : 'produtos'} em nosso catálogo</p>
       </div>
       {products.length === 0 ? (
-        <p className="empty-state">Nenhum produto nesta categoria ainda.</p>
+        <EmptyState title="Nenhum produto" message="Nenhum produto encontrado nesta categoria." />
       ) : (
         <div className="product-grid">
-          {products.map((p) => {
-            const brand = brands.find((b) => b.id === p.brand_id)
-            return <ProductCard key={p.id} product={p} brandName={brand?.name} />
-          })}
+          {products.map((p) => <ProductCard key={p.id} product={p} />)}
         </div>
       )}
     </div>

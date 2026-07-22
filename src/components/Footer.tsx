@@ -1,36 +1,33 @@
 import { Link } from 'react-router-dom'
+import './footer.css'
 
-export default function Footer() {
+export function Footer() {
   return (
-    <footer className="site-footer">
-      <div className="footer-inner">
+    <footer className="footer">
+      <div className="container footer-grid">
         <div className="footer-col">
-          <div className="logo">
-            <span className="logo-mark">P</span>
-            <span className="logo-text">PapoDetailer</span>
-          </div>
-          <p className="footer-tagline">A enciclopédia colaborativa de produtos de estética automotiva.</p>
+          <img src="/13_universo_carro_luxo_header-removebg-preview%20copy%20copy.png" alt="Universo Detail" className="footer-logo-img" />
+          <p className="footer-desc">A biblioteca de produtos para estética automotiva. Encontre os melhores produtos, marcas e categorias para o cuidado do seu veículo.</p>
         </div>
         <div className="footer-col">
           <h4>Navegação</h4>
-          <Link to="/colecoes">Coleções</Link>
-          <Link to="/guias">Guias</Link>
-          <Link to="/kit-builder">Montar Kit</Link>
-          <Link to="/sobre">Sobre</Link>
+          <Link to="/">Início</Link>
+          <Link to="/produtos">Produtos</Link>
+          <Link to="/marcas">Marcas</Link>
         </div>
         <div className="footer-col">
-          <h4>Conta</h4>
-          <Link to="/login">Entrar</Link>
-          <Link to="/cadastro">Criar conta</Link>
-          <Link to="/perfil">Meu perfil</Link>
+          <h4>Categorias</h4>
+          <Link to="/produtos">Ver todas</Link>
         </div>
         <div className="footer-col">
           <h4>Contato</h4>
-          <Link to="/contato">Fale conosco</Link>
+          <p className="footer-desc">contato@universodetail.com.br</p>
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} PapoDetailer. Todos os direitos reservados.</p>
+        <div className="container">
+          <p>&copy; {new Date().getFullYear()} Universo Detail. Todos os direitos reservados.</p>
+        </div>
       </div>
     </footer>
   )

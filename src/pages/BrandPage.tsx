@@ -1,40 +1,42 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { fetchBrandBySlug, fetchProductsByBrand } from '../lib/queries'
-import type { Brand, Product } from '../lib/supabase'
-import ProductCard from '../components/ProductCard'
-import { ArrowLeft } from '@phosphor-icons/react'
+import { useParams } from 'react-router-dom'
+import { fetchProductsByBrand, fetchBrands } from '../lib/queries'
+import { ProductCard } from '../components/ProductCard'
+import { Spinner, EmptyState } from '../components/Feedback'
+import type { ProductWithRelations, Brand } from '../types/database'
+import './products.css'
 
-export default function BrandPage() {
-  const { slug } = useParams<{ slug: string }>()
+export function BrandPage() {
+  const { slug } = useParams()
+  const [products, setProducts] = useState<ProductWithRelations[]>([])
   const [brand, setBrand] = useState<Brand | null>(null)
-  const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!slug) return
     setLoading(true)
-    Promise.all([fetchBrandBySlug(slug), fetchProductsByBrand(slug)])
-      .then(([b, ps]) => { setBrand(b); setProducts(ps) })
-      .finally(() => setLoading(false))
+    fetchBrands().then((brands) => {
+      const b = brands.find((x) => x.slug === slug) ?? null
+      setBrand(b)
+      fetchProductsByBrand(slug).then((d) => { setProducts(d); setLoading(false) })
+    })
   }, [slug])
 
-  if (loading) return <div className="page-loading">Carregando...</div>
-  if (!brand) return <div className="page-loading">Marca não encontrada</div>
+  if (loading) return <Spinner label="Carregando..." />
 
   return (
-    <div className="container page">
-      <Link to="/marcas" className="back-link"><ArrowLeft size={16} /> Marcas</Link>
-      <div className="page-header">
-        <div>
-          <h1>{brand.name}</h1>
-          {brand.country && <span className="brand-country">{brand.country}</span>}
-          {brand.description && <p className="page-subtitle">{brand.description}</p>}
-        </div>
-        {brand.logo_url && <img src={brand.logo_url} alt={brand.name} className="brand-logo-lg" />}
+    <div className="container products-page">
+      <div className="products-head">
+        <h1>{brand?.name ?? 'Marca'}</h1>
+        <p>{products.length} {products.length === 1 ? 'produto' : 'produtos'} em nosso catálogo</p>
+        {brand?.description && <p style={{ marginTop: 8, color: 'var(--color-text-2)' }}>{brand.description}</p>}
       </div>
-      {products.length === 0 ? <p className="empty-state">Nenhum produto desta marca ainda.</p> : (
-        <div className="product-grid">{products.map((p) => <ProductCard key={p.id} product={p} brandName={brand.name} />)}</div>
+      {products.length === 0 ? (
+        <EmptyState title="Nenhum produto" message="Esta marca ainda não possui produtos cadastrados em nosso catálogo." />
+      ) : (
+        <div className="product-grid">
+          {products.map((p) => <ProductCard key={p.id} product={p} />)}
+        </div>
       )}
     </div>
   )
