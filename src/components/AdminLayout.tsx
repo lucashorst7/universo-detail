@@ -1,20 +1,24 @@
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Package, Tag, FolderTree, Star, Users, LogOut } from 'lucide-react'
+import { LayoutDashboard, FolderTree, Star, LogOut } from 'lucide-react'
+import { Package, Tag, UsersThree } from '@phosphor-icons/react'
 import { useAuth } from '../lib/auth'
 import './admin.css'
+
+import type { ComponentType, SVGProps } from 'react'
+type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number | string; weight?: string }>
 
 export function AdminLayout() {
   const location = useLocation()
   const navigate = useNavigate()
   const { signOut } = useAuth()
 
-  const links = [
-    { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
-    { to: '/admin/produtos', label: 'Produtos', icon: Package },
-    { to: '/admin/marcas', label: 'Marcas', icon: Tag },
-    { to: '/admin/categorias', label: 'Categorias', icon: FolderTree },
-    { to: '/admin/avaliacoes', label: 'Avaliações', icon: Star },
-    { to: '/admin/membros', label: 'Membros', icon: Users },
+  const links: { to: string; label: string; icon: IconType; end?: boolean }[] = [
+    { to: '/admin', label: 'Dashboard', icon: LayoutDashboard as IconType, end: true },
+    { to: '/admin/produtos', label: 'Produtos', icon: Package as IconType },
+    { to: '/admin/marcas', label: 'Marcas', icon: Tag as IconType },
+    { to: '/admin/categorias', label: 'Categorias', icon: FolderTree as IconType },
+    { to: '/admin/avaliacoes', label: 'Avaliações', icon: Star as IconType },
+    { to: '/admin/membros', label: 'Membros', icon: UsersThree as IconType },
   ]
 
   function isActive(to: string, end?: boolean) {

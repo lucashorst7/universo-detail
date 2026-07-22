@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Search, ChevronDown, User, LayoutDashboard, LogOut, Menu, X } from 'lucide-react'
+import { getCategoryIcon } from './categoryIcons'
 import { useAuth } from '../lib/auth'
 import type { Category } from '../types/database'
 import './header.css'
@@ -71,7 +72,7 @@ export function Header({ categories }: { categories: Category[] }) {
                   <div className="cat-tray-grid">
                     {categories.map((c) => (
                       <Link key={c.id} to={`/categoria/${c.slug}`} className="cat-tray-item">
-                        {c.icon && <span className="cat-tray-icon">{c.icon}</span>}
+                        {(() => { const Icon = getCategoryIcon(c.icon); return <Icon size={16} weight="regular" className="cat-tray-icon" /> })()}
                         <span>{c.name}</span>
                       </Link>
                     ))}
