@@ -1,139 +1,143 @@
-import { useState, useRef, useEffect } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Search, ChevronDown, User, LayoutDashboard, LogOut, Menu, X } from 'lucide-react'
-import { useAuth } from '../lib/auth'
-import type { Category } from '../types/database'
-import './header.css'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { supabase } from '../lib/supabase'
+import { fetchCategories } from '../lib/queries'
+import type { Category } from '../lib/supabase'
+import { getCategoryIcon } from './categoryIcons'
+import { MagnifyingGlass, List, X, User, Package, Tag, UsersThree } from '@phosphor-icons/react'
 
-export function Header({ categories }: { categories: Category[] }) {
-  const [catOpen, setCatOpen] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [mobileCatsOpen, setMobileCatsOpen] = useState(false)
-  const [query, setQuery] = useState('')
-  const catRef = useRef<HTMLDivElement>(null)
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+export default function Header() {
+  const [categories, setCategories] = useState<Category[]>([])
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [user, setUser] = useState<{ email: string } | null>(null)
   const navigate = useNavigate()
-  const location = useLocation()
-  const { session, isAdmin, signOut } = useAuth()
 
   useEffect(() => {
-    setCatOpen(false)
-    setMobileOpen(false)
-  }, [location.pathname])
-
-  useEffect(() => {
-    function handle(e: MouseEvent) {
-      if (catRef.current && !catRef.current.contains(e.target as Node)) setCatOpen(false)
-    }
-    document.addEventListener('mousedown', handle)
-    return () => document.removeEventListener('mousedown', handle)
+    fetchCategories().then(setCategories).catch(() => {})
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session?.user) setUser({ email: data.session.user.email || '' })
+    })
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) setUser({ email: session.user.email || '' })
+      else setUser(null)
+    })
+    return () => listener.subscription.unsubscribe()
   }, [])
 
-  function scheduleClose() {
-    if (closeTimer.current) clearTimeout(closeTimer.current)
-    closeTimer.current = setTimeout(() => setCatOpen(false), 200)
-  }
-
-  function cancelClose() {
-    if (closeTimer.current) clearTimeout(closeTimer.current)
-    closeTimer.current = null
-  }
-
-  function submitSearch(e: React.FormEvent) {
+  function handleSearch(e: React.FormEvent) {
     e.preventDefault()
-    if (query.trim()) navigate(`/produtos?q=${encodeURIComponent(query.trim())}`)
+    if (searchQuery.trim()) {
+      navigate(`/busca?q=${encodeURIComponent(searchQuery.trim())}`)
+      setMenuOpen(false)
+    }
+  }
+
+  async function handleLogout() {
+    await supabase.auth.signOut()
+    navigate('/')
   }
 
   return (
-    <header className="app-header">
-      <div className="container header-inner">
-        <Link to="/" className="header-logo">
-          <img src="/13_universo_carro_luxo_header-removebg-preview%20copy%20copy.png" alt="Universo Detail" className="header-logo-img" />
-          <span className="header-logo-text">Universo Detail</span>
+    <header className="site-header">
+      <div className="header-inner">
+        <Link to="/" className="logo">
+          <span className="logo-mark">P</span>
+          <span className="logo-text">PapoDetailer</span>
         </Link>
-        <nav className="header-nav">
-          <Link to="/" className="nav-link">Início</Link>
-          <div
-            className="cat-dropdown"
-            ref={catRef}
-            onMouseEnter={() => { cancelClose(); setCatOpen(true) }}
-            onMouseLeave={scheduleClose}
-          >
-            <button className={`cat-trigger ${catOpen ? 'open' : ''}`} onClick={() => setCatOpen((v) => !v)}>
+
+        <nav className="header-nav-desktop">
+          <div className="nav-dropdown">
+            <button className="nav-link nav-link-dropdown">
               Categorias
-              <ChevronDown size={16} className={`cat-chevron ${catOpen ? 'rot' : ''}`} />
             </button>
-            {catOpen && (
-              <div className="cat-tray">
-                {categories.length === 0 ? (
-                  <p className="cat-tray-empty">Nenhuma categoria disponível</p>
-                ) : (
-                  <div className="cat-tray-grid">
-                    {categories.map((c) => (
-                      <Link key={c.id} to={`/categoria/${c.slug}`} className="cat-tray-item">
-                        {c.icon && <span className="cat-tray-icon">{c.icon}</span>}
-                        <span>{c.name}</span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-          <Link to="/produtos" className="nav-link">Produtos</Link>
-          <Link to="/marcas" className="nav-link">Marcas</Link>
-        </nav>
-        <form className="header-search" onSubmit={submitSearch}>
-          <Search size={16} className="search-icon" />
-          <input type="text" placeholder="Buscar produtos..." value={query} onChange={(e) => setQuery(e.target.value)} />
-        </form>
-        {session ? (
-          <div className="header-account">
-            {isAdmin && (
-              <Link to="/admin" className="account-btn account-btn-admin">
-                <LayoutDashboard size={16} /><span>Admin</span>
-              </Link>
-            )}
-            <button className="account-btn" onClick={() => signOut()}>
-              <LogOut size={16} /><span>Sair</span>
-            </button>
-          </div>
-        ) : (
-          <Link to="/login" className="account-btn">
-            <User size={16} /><span>Entrar</span>
-          </Link>
-        )}
-        <button className="header-mobile-toggle" onClick={() => setMobileOpen((v) => !v)} aria-label="Menu">
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-      {mobileOpen && (
-        <div className="mobile-drawer">
-          <Link to="/" className="mobile-link">Início</Link>
-          <button className="mobile-link mobile-link-btn" onClick={() => setMobileCatsOpen((v) => !v)}>
-            Categorias <ChevronDown size={16} className={mobileCatsOpen ? 'rot' : ''} />
-          </button>
-          {mobileCatsOpen && (
-            <div className="mobile-cats">
-              {categories.map((c) => (
-                <Link key={c.id} to={`/categoria/${c.slug}`} className="mobile-link mobile-link-sub">{c.name}</Link>
-              ))}
+            <div className="nav-dropdown-menu">
+              {categories.map((c) => {
+                const Icon = getCategoryIcon(c.icon)
+                return (
+                  <Link key={c.id} to={`/categoria/${c.slug}`} className="nav-dropdown-item">
+                    <Icon size={18} weight="regular" className="cat-tray-icon" />
+                    <span>{c.name}</span>
+                  </Link>
+                )
+              })}
             </div>
-          )}
-          <Link to="/produtos" className="mobile-link">Produtos</Link>
-          <Link to="/marcas" className="mobile-link">Marcas</Link>
-          <form className="mobile-search" onSubmit={submitSearch}>
-            <Search size={16} />
-            <input type="text" placeholder="Buscar produtos..." value={query} onChange={(e) => setQuery(e.target.value)} />
-          </form>
-          {session ? (
-            <>
-              {isAdmin && <Link to="/admin" className="mobile-link">Admin</Link>}
-              <button className="mobile-link mobile-link-btn" onClick={() => signOut()}>Sair</button>
-            </>
+          </div>
+          <NavLink to="/marcas" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>Marcas</NavLink>
+          <NavLink to="/colecoes" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>Coleções</NavLink>
+          <NavLink to="/guias" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>Guias</NavLink>
+          <NavLink to="/kit-builder" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>Montar Kit</NavLink>
+          <NavLink to="/sobre" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>Sobre</NavLink>
+        </nav>
+
+        <form className="header-search-desktop" onSubmit={handleSearch}>
+          <MagnifyingGlass size={16} />
+          <input
+            type="text"
+            placeholder="Buscar produtos..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </form>
+
+        <div className="header-actions">
+          {user ? (
+            <div className="header-user">
+              <Link to="/perfil" className="nav-link">
+                <User size={18} />
+                <span>Perfil</span>
+              </Link>
+              <button onClick={handleLogout} className="btn-ghost">Sair</button>
+            </div>
           ) : (
-            <Link to="/login" className="mobile-link">Entrar</Link>
+            <Link to="/login" className="btn-primary btn-sm">Entrar</Link>
           )}
+          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={24} /> : <List size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <div className="mobile-menu">
+          <form className="mobile-search" onSubmit={handleSearch}>
+            <MagnifyingGlass size={16} />
+            <input
+              type="text"
+              placeholder="Buscar produtos..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </form>
+          <div className="mobile-nav-section">
+            <h4>Categorias</h4>
+            {categories.map((c) => {
+              const Icon = getCategoryIcon(c.icon)
+              return (
+                <Link key={c.id} to={`/categoria/${c.slug}`} className="mobile-nav-link" onClick={() => setMenuOpen(false)}>
+                  <Icon size={18} weight="regular" className="cat-tray-icon" />
+                  <span>{c.name}</span>
+                </Link>
+              )
+            })}
+          </div>
+          <div className="mobile-nav-section">
+            <Link to="/marcas" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Marcas</Link>
+            <Link to="/colecoes" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Coleções</Link>
+            <Link to="/guias" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Guias</Link>
+            <Link to="/kit-builder" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Montar Kit</Link>
+            <Link to="/sobre" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Sobre</Link>
+          </div>
+          <div className="mobile-nav-section">
+            {user ? (
+              <>
+                <Link to="/perfil" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Perfil</Link>
+                <button onClick={() => { handleLogout(); setMenuOpen(false) }} className="mobile-nav-link">Sair</button>
+              </>
+            ) : (
+              <Link to="/login" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Entrar</Link>
+            )}
+          </div>
         </div>
       )}
     </header>

@@ -1,29 +1,76 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Layers, ArrowRight } from 'lucide-react'
-import { supabase } from '../lib/supabase'
-import type { Collection } from '../types'
+import { Link, useParams } from 'react-router-dom'
+import { fetchCollections, fetchCollectionBySlug, fetchCollectionItems } from '../lib/queries'
+import type { Collection, CollectionItem } from '../lib/supabase'
+import ProductCard from '../components/ProductCard'
+import { ArrowLeft } from '@phosphor-icons/react'
 
 export default function CollectionsPage() {
-  const [collections, setCollections] = useState<Collection[]>([]); const [loading, setLoading] = useState(true)
-  useEffect(() => { supabase.from('collections').select('*').order('created_at', { ascending: false }).then(({ data }) => { setCollections((data ?? []) as Collection[]); setLoading(false) }) }, [])
-  return (
-    <div className="bg-neutral-50 min-h-screen py-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12"><p className="font-sans text-xs font-medium tracking-[0.3em] text-primary-500 uppercase">Curadoria</p><h1 className="font-display text-5xl text-secondary-950 mt-2">Coleções</h1></div>
-        {loading ? <div className="flex justify-center"><div className="h-8 w-8 rounded-full border-2 border-primary-500 border-t-transparent animate-spin" /></div> : collections.length === 0 ? <p className="text-center text-neutral-500">Nenhuma coleção.</p> : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {collections.map((c) => (
-              <Link key={c.id} to={`/colecao/${c.slug}`} className="group bg-white rounded-xl p-6 border border-neutral-200 hover:border-primary-300 hover:shadow-lg transition-all">
-                <div className="rounded-lg bg-secondary-950 p-3 w-fit"><Layers className="h-6 w-6 text-primary-400" /></div>
-                <h3 className="mt-4 font-sans font-semibold text-secondary-950 group-hover:text-primary-600 transition-colors">{c.name}</h3>
-                {c.description && <p className="mt-2 text-sm text-neutral-500 line-clamp-2">{c.description}</p>}
-                <p className="mt-2 text-xs text-neutral-400">{c.product_ids?.length ?? 0} produtos</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary-600 group-hover:gap-2 transition-all">Ver coleção <ArrowRight className="h-3 w-3" /></span>
-              </Link>
+  const { slug } = useParams<{ slug: string }>()
+  const [collections, setCollections] = useState<Collection[]>([])
+  const [activeCollection, setActiveCollection] = useState<Collection | null>(null)
+  const [items, setItems] = useState<CollectionItem[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchCollections().then(setCollections).finally(() => setLoading(false))
+  }, [])
+
+  useEffect(() => {
+    if (!slug) { setActiveCollection(null); return }
+    fetchCollectionBySlug(slug).then(async (col) => {
+      setActiveCollection(col)
+      if (col) {
+        const its = await fetchCollectionItems(col.id)
+        setItems(its as CollectionItem[])
+      }
+    })
+  }, [slug])
+
+  if (loading) return <div className="page-loading">Carregando...</div>
+
+  if (slug && activeCollection) {
+    return (
+      <div className="container page">
+        <Link to="/colecoes" className="back-link"><ArrowLeft size={16} /> Coleções</Link>
+        <div className="page-header">
+          <div>
+            <h1>{activeCollection.title}</h1>
+            {activeCollection.description && <p className="page-subtitle">{activeCollection.description}</p>}
+          </div>
+        </div>
+        {items.length === 0 ? (
+          <p className="empty-state">Nenhum produto nesta coleção.</p>
+        ) : (
+          <div className="product-grid">
+            {items.map((item) => item.products && (
+              <div key={item.id}>
+                {item.note && <div className="collection-note">{item.note}</div>}
+                <ProductCard product={item.products} />
+              </div>
             ))}
           </div>
         )}
+      </div>
+    )
+  }
+
+  return (
+    <div className="container page">
+      <div className="page-header">
+        <div>
+          <h1>Coleções</h1>
+          <p className="page-subtitle">Kits curados para cada necessidade</p>
+        </div>
+      </div>
+      <div className="collection-grid">
+        {collections.map((col) => (
+          <Link key={col.id} to={`/colecoes/${col.slug}`} className="collection-card">
+            <h3>{col.title}</h3>
+            {col.description && <p>{col.description}</p>}
+            <span className="collection-link">Ver produtos →</span>
+          </Link>
+        ))}
       </div>
     </div>
   )

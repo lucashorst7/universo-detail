@@ -1,12 +1,46 @@
+import { useState } from 'react'
+
 export default function ContactPage() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [sent, setSent] = useState(false)
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setSent(true)
+    setName('')
+    setEmail('')
+    setMessage('')
+    setTimeout(() => setSent(false), 5000)
+  }
+
   return (
-    <div className="bg-neutral-50 min-h-screen py-16">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <p className="font-sans text-xs font-medium tracking-[0.3em] text-primary-500 uppercase">Fale com a gente</p>
-        <h1 className="font-display text-5xl text-secondary-950 mt-2 mb-8">Contato</h1>
-        <p className="text-neutral-700 leading-relaxed mb-4">Em caso de dúvidas, sugestões ou parcerias, entre em contato pelo e-mail:</p>
-        <p className="text-primary-600 font-medium">contato@papodetail.com.br</p>
+    <div className="container page">
+      <div className="page-header">
+        <div>
+          <h1>Contato</h1>
+          <p className="page-subtitle">Tem dúvidas, sugestões ou quer colaborar? Fale conosco.</p>
+        </div>
       </div>
+
+      {sent && <div className="alert alert-success">Mensagem enviada! Entraremos em contato em breve.</div>}
+
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <label className="form-label">
+          Nome
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required className="form-input" />
+        </label>
+        <label className="form-label">
+          E-mail
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="form-input" />
+        </label>
+        <label className="form-label">
+          Mensagem
+          <textarea value={message} onChange={(e) => setMessage(e.target.value)} required rows={5} className="form-input" />
+        </label>
+        <button type="submit" className="btn-primary">Enviar</button>
+      </form>
     </div>
   )
 }

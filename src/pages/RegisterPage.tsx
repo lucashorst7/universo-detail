@@ -1,84 +1,62 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../lib/auth'
-import './auth.css'
+import { supabase } from '../lib/supabase'
 
-function scorePassword(pw: string): number {
-  let score = 0
-  if (pw.length >= 8) score++
-  if (pw.length >= 12) score++
-  if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++
-  if (/\d/.test(pw)) score++
-  if (/[^A-Za-z0-9]/.test(pw)) score++
-  return Math.min(score, 4)
-}
-
-const STRENGTH_LABELS = ['Muito fraca', 'Fraca', 'Média', 'Forte', 'Muito forte']
-const STRENGTH_COLORS = ['#dc2626', '#dc2626', '#d97706', '#16a34a', '#16a34a']
-
-export function RegisterPage() {
-  const [fullName, setFullName] = useState('')
+export default function RegisterPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [confirm, setConfirm] = useState('')
+  const [displayName, setDisplayName] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const { signUp } = useAuth()
   const navigate = useNavigate()
-
-  const pwScore = scorePassword(password)
-  const pwStrength = password.length > 0 ? STRENGTH_LABELS[pwScore] : ''
-  const pwColor = password.length > 0 ? STRENGTH_COLORS[pwScore] : 'transparent'
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError('')
-    if (password !== confirm) { setError('As senhas não coincidem.'); return }
-    if (pwScore < 2) { setError('Senha muito fraca. Use ao menos 8 caracteres, com maiúsculas, minúsculas e números.'); return }
     setLoading(true)
-    const { error } = await signUp(email, password, fullName)
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { display_name: displayName } },
+    })
     setLoading(false)
-    if (error) { setError(error); return }
-    navigate(`/verificar-email?email=${encodeURIComponent(email)}`)
+    if (error) { setError(error.message); return }
+    if (data.user) {
+      await supabase.from('user_profiles').upsert({
+        user_id: data.user.id,
+        display_name: displayName,
+      })
+    }
+    navigate('/perfil')
   }
 
   return (
-    <div className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
+    <div className="container page auth-page">
+      <div className="auth-card">
         <h1>Criar conta</h1>
-        <p className="auth-sub">Junte-se ao Universo Detail para comentar e avaliar produtos.</p>
-        {error && <div className="auth-error">{error}</div>}
-        <div className="auth-form">
-          <div className="auth-field">
-            <label>Nome completo</label>
-            <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Seu nome completo" required />
-          </div>
-          <div className="auth-field">
-            <label>E-mail</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="voce@email.com" required />
-          </div>
-          <div className="auth-field">
-            <label>Senha</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mínimo 8 caracteres" required minLength={8} />
-            {password && (
-              <>
-                <div className="auth-pw-strength">
-                  <div className="auth-pw-strength-bar" style={{ width: `${(pwScore / 4) * 100}%`, background: pwColor }} />
-                </div>
-                <span style={{ fontSize: 11, color: pwColor }}>{pwStrength}</span>
-              </>
-            )}
-          </div>
-          <div className="auth-field">
-            <label>Confirmar senha</label>
-            <input type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} placeholder="Repita a senha" required />
-          </div>
-          <button type="submit" className="btn btn-primary auth-submit" disabled={loading}>
+        <p className="auth-subtitle">Junte-se à comunidade de detalhamento automotivo</p>
+        {error && <div className="alert alert-error">{error}</div>}
+        <form onSubmit={handleSubmit} className="auth-form">
+          <label className="form-label">
+            Nome
+            <input type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} required className="form-input" />
+          </label>
+          <label className="form-label">
+            E-mail
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="form-input" />
+          </label>
+          <label className="form-label">
+            Senha
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} className="form-input" />
+          </label>
+          <button type="submit" className="btn-primary" disabled={loading}>
             {loading ? 'Criando...' : 'Criar conta'}
           </button>
-        </div>
-        <p className="auth-link">Já tem conta? <Link to="/login">Entrar</Link></p>
-      </form>
+        </form>
+        <p className="auth-footer">
+          Já tem conta? <Link to="/login">Entrar</Link>
+        </p>
+      </div>
     </div>
   )
 }

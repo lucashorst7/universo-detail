@@ -1,14 +1,28 @@
 export default function AboutPage() {
   return (
-    <div className="bg-neutral-50 min-h-screen py-16">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <p className="font-sans text-xs font-medium tracking-[0.3em] text-primary-500 uppercase">Conheça</p>
-        <h1 className="font-display text-5xl text-secondary-950 mt-2 mb-8">Sobre</h1>
-        <div className="prose prose-neutral max-w-none">
-          <p className="text-neutral-700 leading-relaxed mb-4">O PapoDetail é a Biblioteca Brasileira de Estética Automotiva.</p>
-          <p className="text-neutral-700 leading-relaxed mb-4">De hobbista para Hobbista. Portal 100% independente, sem conteúdo patrocinado.</p>
-          <p className="text-neutral-700 leading-relaxed">Reunimos produtos das principais marcas do mercado para que você encontre, compare e escolha o que melhor atende às necessidades do seu veículo.</p>
+    <div className="container page">
+      <div className="page-header">
+        <div>
+          <h1>Sobre o PapoDetailer</h1>
+          <p className="page-subtitle">A enciclopédia colaborativa de produtos de estética automotiva</p>
         </div>
+      </div>
+
+      <div className="prose">
+        <p>
+          O PapoDetailer nasceu da paixão por carros limpos e bem cuidados. Somos uma plataforma
+          colaborativa onde entusiastas e profissionais compartilham reviews honestas de produtos
+          de estética automotiva.
+        </p>
+        <p>
+          Nossa missão é simples: ajudar você a escolher o produto certo para cada necessidade,
+          sem desperdício de dinheiro. Catálogo mais de 100 produtos de 29 marcas diferentes,
+          organizados em 8 categorias.
+        </p>
+        <p>
+          Aqui você encontra reviews reais, guias práticos e kits recomendados para todos os níveis
+          de detalhamento — do iniciante ao profissional.
+        </p>
       </div>
     </div>
   )
