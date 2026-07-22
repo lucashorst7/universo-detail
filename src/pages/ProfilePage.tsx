@@ -40,19 +40,13 @@ export default function ProfilePage() {
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
     if (!profile) return
-    setSaving(true)
-    setSaved(false)
+    setSaving(true); setSaved(false)
     await supabase.from('user_profiles').update({
-      display_name: displayName,
-      current_car: currentCar || null,
-      favorite_shampoo: favoriteShampoo || null,
-      favorite_wax: favoriteWax || null,
-      favorite_tire_dressing: favoriteTireDressing || null,
-      favorite_brand_id: favoriteBrandId || null,
-      updated_at: new Date().toISOString(),
+      display_name: displayName, current_car: currentCar || null, favorite_shampoo: favoriteShampoo || null,
+      favorite_wax: favoriteWax || null, favorite_tire_dressing: favoriteTireDressing || null,
+      favorite_brand_id: favoriteBrandId || null, updated_at: new Date().toISOString(),
     }).eq('id', profile.id)
-    setSaving(false)
-    setSaved(true)
+    setSaving(false); setSaved(true)
     setTimeout(() => setSaved(false), 3000)
   }
 
@@ -60,47 +54,21 @@ export default function ProfilePage() {
 
   return (
     <div className="container page">
-      <div className="page-header">
-        <div>
-          <h1>Meu Perfil</h1>
-          <p className="page-subtitle">Gerencie suas informações e preferências</p>
-        </div>
-      </div>
-
+      <div className="page-header"><div><h1>Meu Perfil</h1><p className="page-subtitle">Gerencie suas informações e preferências</p></div></div>
       <form className="profile-form" onSubmit={handleSave}>
         {saved && <div className="alert alert-success">Perfil atualizado com sucesso!</div>}
-        <label className="form-label">
-          Nome de exibição
-          <input type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="form-input" />
-        </label>
-        <label className="form-label">
-          Carro atual
-          <input type="text" value={currentCar} onChange={(e) => setCurrentCar(e.target.value)} placeholder="Ex: Honda Civic 2022" className="form-input" />
-        </label>
-        <label className="form-label">
-          Shampoo favorito
-          <input type="text" value={favoriteShampoo} onChange={(e) => setFavoriteShampoo(e.target.value)} className="form-input" />
-        </label>
-        <label className="form-label">
-          Cera/favorito
-          <input type="text" value={favoriteWax} onChange={(e) => setFavoriteWax(e.target.value)} className="form-input" />
-        </label>
-        <label className="form-label">
-          Tire dressing favorito
-          <input type="text" value={favoriteTireDressing} onChange={(e) => setFavoriteTireDressing(e.target.value)} className="form-input" />
-        </label>
-        <label className="form-label">
-          Marca favorita
+        <label className="form-label">Nome de exibição<input type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="form-input" /></label>
+        <label className="form-label">Carro atual<input type="text" value={currentCar} onChange={(e) => setCurrentCar(e.target.value)} placeholder="Ex: Honda Civic 2022" className="form-input" /></label>
+        <label className="form-label">Shampoo favorito<input type="text" value={favoriteShampoo} onChange={(e) => setFavoriteShampoo(e.target.value)} className="form-input" /></label>
+        <label className="form-label">Cera favorita<input type="text" value={favoriteWax} onChange={(e) => setFavoriteWax(e.target.value)} className="form-input" /></label>
+        <label className="form-label">Tire dressing favorito<input type="text" value={favoriteTireDressing} onChange={(e) => setFavoriteTireDressing(e.target.value)} className="form-input" /></label>
+        <label className="form-label">Marca favorita
           <select value={favoriteBrandId} onChange={(e) => setFavoriteBrandId(e.target.value)} className="form-input">
             <option value="">Selecione...</option>
-            {brands.map((b) => (
-              <option key={b.id} value={b.id}>{b.name}</option>
-            ))}
+            {brands.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
           </select>
         </label>
-        <button type="submit" className="btn-primary" disabled={saving}>
-          {saving ? 'Salvando...' : 'Salvar alterações'}
-        </button>
+        <button type="submit" className="btn-primary" disabled={saving}>{saving ? 'Salvando...' : 'Salvar alterações'}</button>
       </form>
     </div>
   )

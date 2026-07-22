@@ -1,3 +1,32 @@
-import { Droplet, Armchair, Shield, Eye, Sparkles, CircleDot, Wrench, SprayCan, Package, Cpu, Smartphone, Headphones, Camera, Gamepad2, Monitor, Watch, Speaker, Keyboard, Mouse, Tablet, type LucideIcon } from 'lucide-react'
-const map: Record<string, LucideIcon> = { droplet:Droplet, armchair:Armchair, shield:Shield, eye:Eye, sparkles:Sparkles, 'circle-dot':CircleDot, wrench:Wrench, 'spray-can':SprayCan, package:Package, cpu:Cpu, smartphone:Smartphone, headphones:Headphones, camera:Camera, gamepad:Gamepad2, monitor:Monitor, watch:Watch, speaker:Speaker, keyboard:Keyboard, mouse:Mouse, tablet:Tablet }
-export function categoryIcon(name: string | null): LucideIcon { return (name && map[name]) || Package }
+import {
+  Drop,
+  Armchair,
+  Shield,
+  Eye,
+  Sparkle,
+  Gear,
+  Tire,
+  SprayBottle,
+  Package,
+  type IconProps,
+} from '@phosphor-icons/react'
+import type { ComponentType } from 'react'
+
+const iconMap: Record<string, ComponentType<IconProps>> = {
+  drop: Drop,
+  armchair: Armchair,
+  shield: Shield,
+  eye: Eye,
+  sparkle: Sparkle,
+  gear: Gear,
+  tire: Tire,
+  'spray-bottle': SprayBottle,
+  package: Package,
+}
+
+export function getCategoryIcon(iconName: string | null | undefined) {
+  if (!iconName || !iconMap[iconName]) return Package
+  return iconMap[iconName]
+}
+
+export { Package }

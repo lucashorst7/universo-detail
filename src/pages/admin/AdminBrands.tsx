@@ -7,10 +7,7 @@ export default function AdminBrands() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    supabase.from('brands').select('*').order('name').then(({ data }) => {
-      setBrands(data || [])
-      setLoading(false)
-    })
+    supabase.from('brands').select('*').order('name').then(({ data }) => { setBrands(data || []); setLoading(false) })
   }, [])
 
   if (loading) return <div className="page-loading">Carregando...</div>
@@ -20,21 +17,9 @@ export default function AdminBrands() {
       <h1>Marcas</h1>
       <div className="admin-table-wrap">
         <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>País</th>
-              <th>Destaque</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Nome</th><th>País</th><th>Destaque</th></tr></thead>
           <tbody>
-            {brands.map((b) => (
-              <tr key={b.id}>
-                <td>{b.name}</td>
-                <td>{b.country || '—'}</td>
-                <td>{b.is_featured ? 'Sim' : 'Não'}</td>
-              </tr>
-            ))}
+            {brands.map((b) => (<tr key={b.id}><td>{b.name}</td><td>{b.country || '—'}</td><td>{b.is_featured ? 'Sim' : 'Não'}</td></tr>))}
           </tbody>
         </table>
       </div>

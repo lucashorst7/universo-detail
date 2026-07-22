@@ -142,12 +142,3 @@ export type UserProfile = {
   favorite_brand_id: string | null
   email_verified: boolean
 }
-
-export type ProductWithBrand = Product & {
-  brands?: Pick<Brand, 'name' | 'slug'> | null
-}
-
-export type ProductWithCategory = Product & {
-  categories?: Pick<Category, 'name' | 'slug' | 'icon'> | null
-  brands?: Pick<Brand, 'name' | 'slug'> | null
-}

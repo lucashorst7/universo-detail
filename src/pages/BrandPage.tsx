@@ -33,15 +33,8 @@ export default function BrandPage() {
         </div>
         {brand.logo_url && <img src={brand.logo_url} alt={brand.name} className="brand-logo-lg" />}
       </div>
-
-      {products.length === 0 ? (
-        <p className="empty-state">Nenhum produto desta marca ainda.</p>
-      ) : (
-        <div className="product-grid">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} brandName={brand.name} />
-          ))}
-        </div>
+      {products.length === 0 ? <p className="empty-state">Nenhum produto desta marca ainda.</p> : (
+        <div className="product-grid">{products.map((p) => <ProductCard key={p.id} product={p} brandName={brand.name} />)}</div>
       )}
     </div>
   )

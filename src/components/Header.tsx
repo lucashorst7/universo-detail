@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase'
 import { fetchCategories } from '../lib/queries'
 import type { Category } from '../lib/supabase'
 import { getCategoryIcon } from './categoryIcons'
-import { MagnifyingGlass, List, X, User, Package, Tag, UsersThree } from '@phosphor-icons/react'
+import { MagnifyingGlass, List, X, User } from '@phosphor-icons/react'
 
 export default function Header() {
   const [categories, setCategories] = useState<Category[]>([])
@@ -48,9 +48,7 @@ export default function Header() {
 
         <nav className="header-nav-desktop">
           <div className="nav-dropdown">
-            <button className="nav-link nav-link-dropdown">
-              Categorias
-            </button>
+            <button className="nav-link nav-link-dropdown">Categorias</button>
             <div className="nav-dropdown-menu">
               {categories.map((c) => {
                 const Icon = getCategoryIcon(c.icon)
@@ -72,20 +70,14 @@ export default function Header() {
 
         <form className="header-search-desktop" onSubmit={handleSearch}>
           <MagnifyingGlass size={16} />
-          <input
-            type="text"
-            placeholder="Buscar produtos..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+          <input type="text" placeholder="Buscar produtos..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
         </form>
 
         <div className="header-actions">
           {user ? (
             <div className="header-user">
               <Link to="/perfil" className="nav-link">
-                <User size={18} />
-                <span>Perfil</span>
+                <User size={18} /><span>Perfil</span>
               </Link>
               <button onClick={handleLogout} className="btn-ghost">Sair</button>
             </div>
@@ -102,12 +94,7 @@ export default function Header() {
         <div className="mobile-menu">
           <form className="mobile-search" onSubmit={handleSearch}>
             <MagnifyingGlass size={16} />
-            <input
-              type="text"
-              placeholder="Buscar produtos..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+            <input type="text" placeholder="Buscar produtos..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           </form>
           <div className="mobile-nav-section">
             <h4>Categorias</h4>

@@ -59,9 +59,7 @@ export async function fetchProductsByCategory(categorySlug: string): Promise<Pro
     .select('id')
     .eq('slug', categorySlug)
     .single()
-
   if (!category) return []
-
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -78,9 +76,7 @@ export async function fetchProductsByBrand(brandSlug: string): Promise<Product[]
     .select('id')
     .eq('slug', brandSlug)
     .single()
-
   if (!brand) return []
-
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -220,10 +216,8 @@ export async function searchProducts(query: string): Promise<Product[]> {
     .eq('entity_type', 'product')
     .limit(20)
   if (error || !data) return []
-
   const ids = data.map((d) => d.entity_id)
   if (ids.length === 0) return []
-
   const { data: products } = await supabase
     .from('products')
     .select('*')

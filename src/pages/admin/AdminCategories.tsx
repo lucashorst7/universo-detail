@@ -8,10 +8,7 @@ export default function AdminCategories() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    supabase.from('categories').select('*').order('display_order').then(({ data }) => {
-      setCategories(data || [])
-      setLoading(false)
-    })
+    supabase.from('categories').select('*').order('display_order').then(({ data }) => { setCategories(data || []); setLoading(false) })
   }, [])
 
   if (loading) return <div className="page-loading">Carregando...</div>
@@ -24,13 +21,8 @@ export default function AdminCategories() {
           const Icon = getCategoryIcon(c.icon)
           return (
             <div key={c.id} className="admin-cat-card">
-              <div className="admin-cat-icon">
-                <Icon size={28} weight="regular" />
-              </div>
-              <div>
-                <h3>{c.name}</h3>
-                <p>{c.slug}</p>
-              </div>
+              <div className="admin-cat-icon"><Icon size={28} weight="regular" /></div>
+              <div><h3>{c.name}</h3><p>{c.slug}</p></div>
             </div>
           )
         })}

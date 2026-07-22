@@ -10,9 +10,7 @@ export default function LoginPage() {
   const navigate = useNavigate()
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
+    e.preventDefault(); setError(''); setLoading(true)
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     setLoading(false)
     if (error) { setError(error.message); return }
@@ -26,21 +24,11 @@ export default function LoginPage() {
         <p className="auth-subtitle">Acesse sua conta para avaliar produtos e salvar favoritos</p>
         {error && <div className="alert alert-error">{error}</div>}
         <form onSubmit={handleSubmit} className="auth-form">
-          <label className="form-label">
-            E-mail
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="form-input" />
-          </label>
-          <label className="form-label">
-            Senha
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="form-input" />
-          </label>
-          <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Entrando...' : 'Entrar'}
-          </button>
+          <label className="form-label">E-mail<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="form-input" /></label>
+          <label className="form-label">Senha<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="form-input" /></label>
+          <button type="submit" className="btn-primary" disabled={loading}>{loading ? 'Entrando...' : 'Entrar'}</button>
         </form>
-        <p className="auth-footer">
-          Não tem conta? <Link to="/cadastro">Criar conta</Link>
-        </p>
+        <p className="auth-footer">Não tem conta? <Link to="/cadastro">Criar conta</Link></p>
       </div>
     </div>
   )

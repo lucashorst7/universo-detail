@@ -18,61 +18,40 @@ export default function KitBuilderPage() {
     fetchCategories().then(async (cats) => {
       setCategories(cats)
       const prodsByCat: Record<string, Product[]> = {}
-      for (const c of cats) {
-        prodsByCat[c.slug] = await fetchProductsByCategory(c.slug)
-      }
+      for (const c of cats) { prodsByCat[c.slug] = await fetchProductsByCategory(c.slug) }
       setProducts(prodsByCat)
       if (cats.length > 0) setActiveCat(cats[0].slug)
     }).finally(() => setLoading(false))
   }, [])
 
   function addToKit(product: Product, category: Category) {
-    setKit((prev) => {
-      if (prev.some((k) => k.product.id === product.id)) return prev
-      return [...prev, { product, category }]
-    })
+    setKit((prev) => prev.some((k) => k.product.id === product.id) ? prev : [...prev, { product, category }])
   }
-
   function removeFromKit(productId: string) {
     setKit((prev) => prev.filter((k) => k.product.id !== productId))
   }
 
   if (loading) return <div className="page-loading">Carregando...</div>
-
   const activeProducts = activeCat ? products[activeCat] || [] : []
   const activeCategory = categories.find((c) => c.slug === activeCat)
 
   return (
     <div className="container page kit-builder">
-      <div className="page-header">
-        <div>
-          <h1>Montar Kit</h1>
-          <p className="page-subtitle">Monte seu kit de detalhamento escolhendo produtos por categoria</p>
-        </div>
-      </div>
-
+      <div className="page-header"><div><h1>Montar Kit</h1><p className="page-subtitle">Monte seu kit de detalhamento escolhendo produtos por categoria</p></div></div>
       <div className="kit-layout">
         <div className="kit-selector">
           <div className="kit-cat-tabs">
             {categories.map((c) => {
               const Icon = getCategoryIcon(c.icon)
               return (
-                <button
-                  key={c.id}
-                  className={`kit-cat-tab${activeCat === c.slug ? ' active' : ''}`}
-                  onClick={() => setActiveCat(c.slug)}
-                >
-                  <Icon size={18} weight="regular" />
-                  <span>{c.name}</span>
+                <button key={c.id} className={`kit-cat-tab${activeCat === c.slug ? ' active' : ''}`} onClick={() => setActiveCat(c.slug)}>
+                  <Icon size={18} weight="regular" /><span>{c.name}</span>
                 </button>
               )
             })}
           </div>
-
           <div className="kit-products">
-            {activeProducts.length === 0 ? (
-              <p className="empty-state">Nenhum produto nesta categoria.</p>
-            ) : (
+            {activeProducts.length === 0 ? <p className="empty-state">Nenhum produto nesta categoria.</p> : (
               <div className="kit-product-list">
                 {activeProducts.map((p) => {
                   const inKit = kit.some((k) => k.product.id === p.id)
@@ -83,11 +62,7 @@ export default function KitBuilderPage() {
                         <span className="kit-product-name">{p.name}</span>
                         {p.short_description && <span className="kit-product-desc">{p.short_description}</span>}
                       </div>
-                      <button
-                        className={`btn-sm ${inKit ? 'btn-secondary' : 'btn-primary'}`}
-                        onClick={() => activeCategory && addToKit(p, activeCategory)}
-                        disabled={inKit}
-                      >
+                      <button className={`btn-sm ${inKit ? 'btn-secondary' : 'btn-primary'}`} onClick={() => activeCategory && addToKit(p, activeCategory)} disabled={inKit}>
                         {inKit ? 'Adicionado' : <><Plus size={14} /> Adicionar</>}
                       </button>
                     </div>
@@ -97,12 +72,9 @@ export default function KitBuilderPage() {
             )}
           </div>
         </div>
-
         <div className="kit-summary">
           <h2>Meu Kit ({kit.length})</h2>
-          {kit.length === 0 ? (
-            <p className="empty-state">Seu kit está vazio. Adicione produtos das categorias.</p>
-          ) : (
+          {kit.length === 0 ? <p className="empty-state">Seu kit está vazio. Adicione produtos das categorias.</p> : (
             <>
               <div className="kit-summary-list">
                 {kit.map((item) => (
@@ -111,16 +83,11 @@ export default function KitBuilderPage() {
                       <span className="kit-summary-cat">{item.category.name}</span>
                       <span className="kit-summary-name">{item.product.name}</span>
                     </div>
-                    <button onClick={() => removeFromKit(item.product.id)} className="kit-remove-btn">
-                      <Trash size={16} />
-                    </button>
+                    <button onClick={() => removeFromKit(item.product.id)} className="kit-remove-btn"><Trash size={16} /></button>
                   </div>
                 ))}
               </div>
-              <Link to="/colecoes" className="btn-primary kit-checkout">
-                <ShoppingCart size={18} />
-                Ver coleções
-              </Link>
+              <Link to="/colecoes" className="btn-primary kit-checkout"><ShoppingCart size={18} /> Ver coleções</Link>
             </>
           )}
         </div>
