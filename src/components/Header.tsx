@@ -1,9 +1,24 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Search, ChevronDown, User, LayoutDashboard, LogOut, Menu, X } from 'lucide-react'
+import { Search, ChevronDown, User, LayoutDashboard, LogOut, Menu, X, Droplet, Armchair, Shield, Eye, Sparkles, CircleDot, Wrench, SprayCan, Package, type LucideIcon } from 'lucide-react'
 import { useAuth } from '../lib/auth'
 import type { Category } from '../types/database'
 import './header.css'
+
+const iconMap: Record<string, LucideIcon> = {
+  'drop': Droplet,
+  'armchair': Armchair,
+  'shield': Shield,
+  'eye': Eye,
+  'sparkle': Sparkles,
+  'tire': CircleDot,
+  'gear': Wrench,
+  'spray-bottle': SprayCan,
+  'droplet': Droplet,
+  'sparkles': Sparkles,
+  'spray-can': SprayCan,
+  'package': Package,
+}
 
 export function Header({ categories }: { categories: Category[] }) {
   const [catOpen, setCatOpen] = useState(false)
@@ -69,12 +84,15 @@ export function Header({ categories }: { categories: Category[] }) {
                   <p className="cat-tray-empty">Nenhuma categoria disponível</p>
                 ) : (
                   <div className="cat-tray-grid">
-                    {categories.map((c) => (
-                      <Link key={c.id} to={`/categoria/${c.slug}`} className="cat-tray-item">
-                        {c.icon && <span className="cat-tray-icon">{c.icon}</span>}
-                        <span>{c.name}</span>
-                      </Link>
-                    ))}
+                    {categories.map((c) => {
+                      const Icon = iconMap[c.icon ?? ''] ?? Package
+                      return (
+                        <Link key={c.id} to={`/categoria/${c.slug}`} className="cat-tray-item">
+                          <span className="cat-tray-icon"><Icon size={16} /></span>
+                          <span>{c.name}</span>
+                        </Link>
+                      )
+                    })}
                   </div>
                 )}
               </div>
@@ -115,9 +133,14 @@ export function Header({ categories }: { categories: Category[] }) {
           </button>
           {mobileCatsOpen && (
             <div className="mobile-cats">
-              {categories.map((c) => (
-                <Link key={c.id} to={`/categoria/${c.slug}`} className="mobile-link mobile-link-sub">{c.name}</Link>
-              ))}
+              {categories.map((c) => {
+                const Icon = iconMap[c.icon ?? ''] ?? Package
+                return (
+                  <Link key={c.id} to={`/categoria/${c.slug}`} className="mobile-link mobile-link-sub">
+                    <Icon size={16} className="cat-tray-icon" /> {c.name}
+                  </Link>
+                )
+              })}
             </div>
           )}
           <Link to="/produtos" className="mobile-link">Produtos</Link>
