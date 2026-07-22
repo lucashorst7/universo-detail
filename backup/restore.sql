@@ -3,62 +3,32 @@
 -- Projeto: Papo Detailer (Estética Automotiva)
 -- Data do Backup: 2026-07-22
 --
--- INSTRUÇÕES:
--- 1. Execute este arquivo no SQL Editor do Supabase ou via psql
--- 2. A ordem de execução está correta para evitar erros de dependência
--- 3. Tempo estimado: ~30 segundos
+-- USO: psql "sua_string_de_conexao" -f restore.sql
+-- Ou execute cada arquivo manualmente na ordem indicada
 -- ============================================================
 
--- ============================================================
--- PASSO 0: TIPO ENUMERADO
--- ============================================================
-DO $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'product_status') THEN
-        CREATE TYPE product_status AS ENUM ('draft', 'review', 'published', 'archived');
-    END IF;
-END $$;
+-- PASSO 0: Usuários de autenticação
+\i supabase/auth/00_auth_users.sql
 
--- ============================================================
--- PASSO 1: CRIAR TABELAS
--- ============================================================
-\i schema/01_schema.sql
+-- PASSO 1: Criar tabelas
+\i supabase/schema/01_schema.sql
 
--- ============================================================
--- PASSO 2: POLÍTICAS RLS
--- ============================================================
-\i rls/02_rls_policies.sql
+-- PASSO 2: Políticas RLS
+\i supabase/rls/02_rls_policies.sql
 
--- ============================================================
--- PASSO 3: ÍNDICES
--- ============================================================
-\i indexes/03_indexes.sql
+-- PASSO 3: Índices
+\i supabase/indexes/03_indexes.sql
 
--- ============================================================
--- PASSO 4: FUNÇÕES
--- ============================================================
-\i functions/04_functions.sql
+-- PASSO 4: Funções
+\i supabase/functions/04_functions.sql
 
--- ============================================================
--- PASSO 5: TRIGGERS
--- ============================================================
-\i triggers/05_triggers.sql
+-- PASSO 5: Triggers
+\i supabase/triggers/05_triggers.sql
 
--- ============================================================
--- PASSO 6: DADOS
--- ============================================================
-\i data/06_data.sql
+-- PASSO 6: Dados
+\i supabase/data/06_data.sql
 
--- ============================================================
--- PASSO 7: CHAVES ESTRANGEIRAS E CONSTRAINTS UNIQUE
--- ============================================================
-\i schema/07_foreign_keys.sql
+-- PASSO 7: Chaves estrangeiras e unique
+\i supabase/schema/07_foreign_keys.sql
 
--- ============================================================
--- PASSO 8: USUÁRIOS DE AUTENTICAÇÃO
--- ============================================================
-\i auth/00_auth_users.sql
-
--- ============================================================
 -- RESTAURAÇÃO COMPLETA!
--- ============================================================
