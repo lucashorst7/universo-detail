@@ -1,6 +1,4 @@
--- ============================================================
--- TRIGGERS
--- ============================================================
+-- TRIGGERS - Papo Detailer - 2026-07-22
 
 CREATE TRIGGER audit_affiliate_links_changes AFTER INSERT OR DELETE OR UPDATE ON public.affiliate_links FOR EACH ROW EXECUTE FUNCTION capture_admin_audit_log();
 CREATE TRIGGER audit_brands_changes AFTER INSERT OR DELETE OR UPDATE ON public.brands FOR EACH ROW EXECUTE FUNCTION capture_admin_audit_log();

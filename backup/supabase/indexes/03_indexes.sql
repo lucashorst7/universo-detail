@@ -1,6 +1,4 @@
--- ============================================================
--- ÍNDICES
--- ============================================================
+-- ÍNDICES - Papo Detailer - 2026-07-22
 
 CREATE INDEX admin_audit_logs_actor_idx ON public.admin_audit_logs USING btree (actor_id, created_at DESC);
 CREATE INDEX admin_audit_logs_created_at_idx ON public.admin_audit_logs USING btree (created_at DESC);

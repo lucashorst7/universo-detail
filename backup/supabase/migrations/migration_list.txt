@@ -1,6 +1,4 @@
-LISTA DE MIGRATIONS DO PROJETO
-============================================================
-Total: 59 migrations
+LISTA DE MIGRATIONS (59 total)
 ============================================================
 
   1. 20260711200144_20260710122843_create_automotive_aesthetics_schema.sql.sql

@@ -1,19 +1,8 @@
--- ============================================================
--- BACKUP COMPLETO DO SCHEMA DO BANCO DE DADOS
--- Projeto: Papo Detailer (Estética Automotiva)
--- Data do Backup: 2026-07-22
--- Total de tabelas: 22
--- ============================================================
-
--- ============================================================
--- 1. TIPOS ENUMERADOS
--- ============================================================
-CREATE TYPE product_status AS ENUM ('draft', 'review', 'published', 'archived');
+-- BACKUP COMPLETO DO SCHEMA - Papo Detailer - 2026-07-22
+CREATE TYPE IF NOT EXISTS product_status AS ENUM ('draft', 'review', 'published', 'archived');
 
 
--- ============================================================
--- Tabela: categories
--- ============================================================
+-- categories
 CREATE TABLE IF NOT EXISTS public.categories (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     name text NOT NULL,
@@ -22,14 +11,11 @@ CREATE TABLE IF NOT EXISTS public.categories (
     icon text DEFAULT 'package'::text,
     cover_image text,
     display_order integer DEFAULT 0,
-    created_at timestamp with time zone DEFAULT now(),
-    CONSTRAINT categories_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now()
 );
 ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: brands
--- ============================================================
+-- brands
 CREATE TABLE IF NOT EXISTS public.brands (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     name text NOT NULL,
@@ -38,14 +24,11 @@ CREATE TABLE IF NOT EXISTS public.brands (
     logo_url text,
     country text,
     is_featured boolean DEFAULT false,
-    created_at timestamp with time zone DEFAULT now(),
-    CONSTRAINT brands_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now()
 );
 ALTER TABLE public.brands ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: products
--- ============================================================
+-- products
 CREATE TABLE IF NOT EXISTS public.products (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     name text NOT NULL,
@@ -69,27 +52,18 @@ CREATE TABLE IF NOT EXISTS public.products (
     publish_at timestamp with time zone,
     published_at timestamp with time zone,
     parent_product_id uuid,
-    variant_label text,
-    CONSTRAINT products_pkey PRIMARY KEY (id)
+    variant_label text
 );
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: product_categories
--- ============================================================
+-- product_categories
 CREATE TABLE IF NOT EXISTS public.product_categories (
     product_id uuid NOT NULL,
-    category_id uuid NOT NULL,
-    CONSTRAINT product_categories_pkey PRIMARY KEY (product_id),
-    CONSTRAINT product_categories_pkey PRIMARY KEY (product_id),
-    CONSTRAINT product_categories_pkey PRIMARY KEY (category_id),
-    CONSTRAINT product_categories_pkey PRIMARY KEY (category_id)
+    category_id uuid NOT NULL
 );
 ALTER TABLE public.product_categories ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: affiliate_links
--- ============================================================
+-- affiliate_links
 CREATE TABLE IF NOT EXISTS public.affiliate_links (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     product_id uuid NOT NULL,
@@ -99,25 +73,19 @@ CREATE TABLE IF NOT EXISTS public.affiliate_links (
     currency text DEFAULT 'BRL'::text,
     is_primary boolean DEFAULT false,
     display_order integer DEFAULT 0,
-    created_at timestamp with time zone DEFAULT now(),
-    CONSTRAINT affiliate_links_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now()
 );
 ALTER TABLE public.affiliate_links ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: admin_users
--- ============================================================
+-- admin_users
 CREATE TABLE IF NOT EXISTS public.admin_users (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
-    created_at timestamp with time zone DEFAULT now(),
-    CONSTRAINT admin_users_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now()
 );
 ALTER TABLE public.admin_users ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: admin_audit_logs
--- ============================================================
+-- admin_audit_logs
 CREATE TABLE IF NOT EXISTS public.admin_audit_logs (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     actor_id uuid,
@@ -129,64 +97,49 @@ CREATE TABLE IF NOT EXISTS public.admin_audit_logs (
     changed_fields ARRAY DEFAULT '{}'::text[] NOT NULL,
     previous_data jsonb,
     current_data jsonb,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT admin_audit_logs_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.admin_audit_logs ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: affiliate_clicks
--- ============================================================
+-- affiliate_clicks
 CREATE TABLE IF NOT EXISTS public.affiliate_clicks (
     id bigint NOT NULL,
     affiliate_link_id uuid NOT NULL,
     product_id uuid NOT NULL,
     page_path text NOT NULL,
     referrer_domain text,
-    clicked_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT affiliate_clicks_pkey PRIMARY KEY (id)
+    clicked_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.affiliate_clicks ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: product_slug_history
--- ============================================================
+-- product_slug_history
 CREATE TABLE IF NOT EXISTS public.product_slug_history (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     product_id uuid NOT NULL,
     slug text NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT product_slug_history_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.product_slug_history ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: brand_slug_history
--- ============================================================
+-- brand_slug_history
 CREATE TABLE IF NOT EXISTS public.brand_slug_history (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     brand_id uuid NOT NULL,
     slug text NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT brand_slug_history_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.brand_slug_history ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: category_slug_history
--- ============================================================
+-- category_slug_history
 CREATE TABLE IF NOT EXISTS public.category_slug_history (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     category_id uuid NOT NULL,
     slug text NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT category_slug_history_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.category_slug_history ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: runtime_error_logs
--- ============================================================
+-- runtime_error_logs
 CREATE TABLE IF NOT EXISTS public.runtime_error_logs (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     incident_code text DEFAULT upper(substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 10)) NOT NULL,
@@ -196,14 +149,11 @@ CREATE TABLE IF NOT EXISTS public.runtime_error_logs (
     stack text,
     component_stack text,
     route text,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT runtime_error_logs_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.runtime_error_logs ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: search_documents
--- ============================================================
+-- search_documents
 CREATE TABLE IF NOT EXISTS public.search_documents (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     entity_type text NOT NULL,
@@ -220,26 +170,20 @@ CREATE TABLE IF NOT EXISTS public.search_documents (
     rating numeric DEFAULT 0 NOT NULL,
     review_count integer DEFAULT 0 NOT NULL,
     is_new boolean DEFAULT false NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT search_documents_pkey PRIMARY KEY (id)
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.search_documents ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: search_insights
--- ============================================================
+-- search_insights
 CREATE TABLE IF NOT EXISTS public.search_insights (
     id bigint NOT NULL,
     query_normalized text NOT NULL,
     result_count integer NOT NULL,
-    searched_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT search_insights_pkey PRIMARY KEY (id)
+    searched_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.search_insights ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: customer_reviews
--- ============================================================
+-- customer_reviews
 CREATE TABLE IF NOT EXISTS public.customer_reviews (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     product_id uuid,
@@ -251,14 +195,11 @@ CREATE TABLE IF NOT EXISTS public.customer_reviews (
     user_id uuid DEFAULT auth.uid() NOT NULL,
     is_deleted boolean DEFAULT false NOT NULL,
     deleted_by uuid,
-    deleted_at timestamp with time zone,
-    CONSTRAINT customer_reviews_pkey PRIMARY KEY (id)
+    deleted_at timestamp with time zone
 );
 ALTER TABLE public.customer_reviews ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: user_profiles
--- ============================================================
+-- user_profiles
 CREATE TABLE IF NOT EXISTS public.user_profiles (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
@@ -271,27 +212,21 @@ CREATE TABLE IF NOT EXISTS public.user_profiles (
     favorite_wax text,
     favorite_tire_dressing text,
     favorite_brand_id uuid,
-    email_verified boolean DEFAULT false NOT NULL,
-    CONSTRAINT user_profiles_pkey PRIMARY KEY (id)
+    email_verified boolean DEFAULT false NOT NULL
 );
 ALTER TABLE public.user_profiles ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: banned_users
--- ============================================================
+-- banned_users
 CREATE TABLE IF NOT EXISTS public.banned_users (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     reason text NOT NULL,
     banned_by uuid,
-    banned_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT banned_users_pkey PRIMARY KEY (id)
+    banned_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.banned_users ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: collections
--- ============================================================
+-- collections
 CREATE TABLE IF NOT EXISTS public.collections (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     slug text NOT NULL,
@@ -300,27 +235,21 @@ CREATE TABLE IF NOT EXISTS public.collections (
     cover_image text,
     display_order integer DEFAULT 0 NOT NULL,
     is_featured boolean DEFAULT false NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT collections_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.collections ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: collection_items
--- ============================================================
+-- collection_items
 CREATE TABLE IF NOT EXISTS public.collection_items (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     collection_id uuid NOT NULL,
     product_id uuid NOT NULL,
     display_order integer DEFAULT 0 NOT NULL,
-    note text,
-    CONSTRAINT collection_items_pkey PRIMARY KEY (id)
+    note text
 );
 ALTER TABLE public.collection_items ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: guides
--- ============================================================
+-- guides
 CREATE TABLE IF NOT EXISTS public.guides (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     slug text NOT NULL,
@@ -328,33 +257,26 @@ CREATE TABLE IF NOT EXISTS public.guides (
     description text,
     cover_image text,
     category_id uuid,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT guides_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.guides ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: guide_products
--- ============================================================
+-- guide_products
 CREATE TABLE IF NOT EXISTS public.guide_products (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     guide_id uuid NOT NULL,
     product_id uuid NOT NULL,
     match_label text,
-    display_order integer DEFAULT 0 NOT NULL,
-    CONSTRAINT guide_products_pkey PRIMARY KEY (id)
+    display_order integer DEFAULT 0 NOT NULL
 );
 ALTER TABLE public.guide_products ENABLE ROW LEVEL SECURITY;
 
--- ============================================================
--- Tabela: spotlight
--- ============================================================
+-- spotlight
 CREATE TABLE IF NOT EXISTS public.spotlight (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     product_id uuid NOT NULL,
     week_start date DEFAULT CURRENT_DATE NOT NULL,
     editorial_text text,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    CONSTRAINT spotlight_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 ALTER TABLE public.spotlight ENABLE ROW LEVEL SECURITY;

@@ -1,13 +1,6 @@
--- ============================================================
--- BACKUP COMPLETO DE DADOS DO BANCO DE DADOS
--- Projeto: Papo Detailer (Estética Automotiva)
--- Data do Backup: 2026-07-22
--- ============================================================
+-- DADOS COMPLETOS DO BANCO - Papo Detailer - 2026-07-22
 
--- ============================================================
 -- CATEGORIAS
--- ============================================================
-
 -- categories (8 registros)
 
 INSERT INTO public.categories (id, name, slug, description, icon, cover_image, display_order, created_at) VALUES ('330f3e55-c35d-411b-afff-3d2184e0f3b9', 'Limpeza Externa', 'limpeza-externa', 'Produtos para lavagem e limpeza automotiva, incluindo shampoos neutros, descontaminantes e lava-rápidos.', 'drop', NULL, 1, '2026-07-11T20:06:38.696513+00:00');
@@ -19,10 +12,7 @@ INSERT INTO public.categories (id, name, slug, description, icon, cover_image, d
 INSERT INTO public.categories (id, name, slug, description, icon, cover_image, display_order, created_at) VALUES ('b1343dd8-ae32-4239-a176-6af36a42cb64', 'Acessórios e Ferramentas', 'acessorios-e-ferramentas', NULL, 'gear', NULL, 7, '2026-07-19T17:02:32.45277+00:00');
 INSERT INTO public.categories (id, name, slug, description, icon, cover_image, display_order, created_at) VALUES ('8ef857d3-fd72-4595-8339-a4f25e83dab7', 'Aromatizantes', 'aromatizantes', 'Aromatizantes, perfumes e odorizadores para o interior do veículo.', 'spray-bottle', NULL, 8, '2026-07-12T00:03:53.846287+00:00');
 
--- ============================================================
 -- MARCAS
--- ============================================================
-
 -- brands (29 registros)
 
 INSERT INTO public.brands (id, name, slug, description, logo_url, country, is_featured, created_at) VALUES ('8b51b80f-04d1-4897-96af-1b0fe342fbf7', 'Alcance', 'alcance', 'Marca brasileira especializada em vitrificadores cerâmicos e grafeno de alta durabilidade.', NULL, 'Brasil', false, '2026-07-12T00:03:53.846287+00:00');
@@ -55,10 +45,7 @@ INSERT INTO public.brands (id, name, slug, description, logo_url, country, is_fe
 INSERT INTO public.brands (id, name, slug, description, logo_url, country, is_featured, created_at) VALUES ('72e1ebc9-bb00-4da5-8263-cbf1500055bf', 'Wurth', 'wurth', NULL, NULL, NULL, false, '2026-07-12T01:16:38.675668+00:00');
 INSERT INTO public.brands (id, name, slug, description, logo_url, country, is_featured, created_at) VALUES ('dfbfa922-6f13-408a-b5ab-fa62e54f92b1', 'Zacs', 'zacs', NULL, NULL, NULL, false, '2026-07-12T01:16:38.675668+00:00');
 
--- ============================================================
 -- PRODUTOS
--- ============================================================
-
 -- products (105 registros)
 
 INSERT INTO public.products (id, name, slug, brand_id, category_id, short_description, description, specifications, usability, tips, image_url, gallery_images, rating, review_count, is_featured, is_new, tags, created_at, status, publish_at, published_at, parent_product_id, variant_label) VALUES ('001f1af8-f6d2-432f-bf7f-ca3c7ff54caa', 'Acidus Fast Limpador de Uso Geral Uso Externo Vonixx 500ml', 'acidus-fast-limpador-de-uso-geral-uso-externo-vonixx-500ml', '2521bc20-0c66-4bea-91fa-83cef52db28b', 'fc57ced6-8e7f-449e-860d-6fd7fcab1081', NULL, NULL, '{}'::text[], NULL, NULL, 'https://images.tcdn.com.br/img/img_prod/1152560/acidus_fast_limpador_de_uso_geral_uso_externo_vo_1_20251015005351_7ceb989344b8.jpg', '{}'::text[], 0, 0, false, false, '{}'::text[], '2026-07-12T01:21:39.288505+00:00', 'published', NULL, '2026-07-12T16:23:51.432373+00:00', NULL, '500ml');
@@ -167,10 +154,7 @@ INSERT INTO public.products (id, name, slug, brand_id, category_id, short_descri
 INSERT INTO public.products (id, name, slug, brand_id, category_id, short_description, description, specifications, usability, tips, image_url, gallery_images, rating, review_count, is_featured, is_new, tags, created_at, status, publish_at, published_at, parent_product_id, variant_label) VALUES ('1d648d5c-e838-4b5d-a288-f27235ca59c0', 'VX45 Vitrificador de Pintura Ceramic Coat Alcance 60ml', 'vx45-vitrificador-alcance-60ml', '8b51b80f-04d1-4897-96af-1b0fe342fbf7', 'f1341dff-415a-4e17-8262-5549273d6b1d', 'Revestimento cerâmico 9H com proteção por até 3 anos. Camada vitrificada com poros menores que a tinta.', 'O VX45 cria uma camada vitrificada que tem os poros muito menores que os da tinta automotiva, proporcionando considerável diminuição do acúmulo de sujeiras. Proteção 9H por até 3 anos, maior intensidade de brilho e profundidade de cor, melhor sensibilidade ao toque.', '{"Tipo": "Vitrificador Cerâmico", "Marca": "Alcance", "Dureza": "9H", "Volume": "60ml", "Durabilidade": "Até 3 anos"}'::jsonb, NULL, NULL, 'https://images.tcdn.com.br/img/img_prod/1152560/vx45_vitrificador_de_pintura_revestimento_ceramico_protecao_9h_por_ate_3_anos_alcance_60ml_21_1_7bc5044ade591f82496e2b5923ee95df.jpg', '{}'::text[], 5, 3, true, false, '{}'::text[], '2026-07-12T00:05:35.180408+00:00', 'published', NULL, '2026-07-12T01:41:28.083661+00:00', NULL, NULL);
 INSERT INTO public.products (id, name, slug, brand_id, category_id, short_description, description, specifications, usability, tips, image_url, gallery_images, rating, review_count, is_featured, is_new, tags, created_at, status, publish_at, published_at, parent_product_id, variant_label) VALUES ('5570b578-f72d-45e8-97d1-ccf115267e4f', 'Zyon Limpador Automotivo Zacs 500ml', 'zyon-limpador-automotivo-zacs-500ml', 'dfbfa922-6f13-408a-b5ab-fa62e54f92b1', 'fc57ced6-8e7f-449e-860d-6fd7fcab1081', NULL, NULL, '{}'::text[], NULL, NULL, 'https://images.tcdn.com.br/img/img_prod/1152560/zyon_limpador_automotivo_zacs_500ml_1_20260426133216_c114a538f544.jpg', '{}'::text[], 0, 0, false, false, '{}'::text[], '2026-07-12T01:21:39.288505+00:00', 'published', NULL, '2026-07-12T16:23:51.432373+00:00', NULL, NULL);
 
--- ============================================================
--- PRODUTO_CATEGORIAS (N:N)
--- ============================================================
-
+-- PRODUTO_CATEGORIAS
 -- product_categories (105 registros)
 
 INSERT INTO public.product_categories (product_id, category_id) VALUES ('b31d52ff-cfe1-43cc-9173-bab2d3ec6625', '330f3e55-c35d-411b-afff-3d2184e0f3b9');
@@ -279,36 +263,24 @@ INSERT INTO public.product_categories (product_id, category_id) VALUES ('276f83b
 INSERT INTO public.product_categories (product_id, category_id) VALUES ('0707ffcf-4c43-49f4-89e4-55aea6efe919', 'f13b7270-b3c6-449b-b1d0-78394cafbd51');
 INSERT INTO public.product_categories (product_id, category_id) VALUES ('8c98c8a7-1635-40d8-aa67-ea39abb0e3a2', '330f3e55-c35d-411b-afff-3d2184e0f3b9');
 
--- ============================================================
 -- ADMIN USERS
--- ============================================================
-
 -- admin_users (1 registros)
 
 INSERT INTO public.admin_users (id, user_id, created_at) VALUES ('9e827698-bfcc-4447-adfa-1d0d84ff1af9', '63bcd7bb-63e6-4b31-a338-cf06831572a1', '2026-07-16T03:03:39.720662+00:00');
 
--- ============================================================
 -- USER PROFILES
--- ============================================================
-
 -- user_profiles (1 registros)
 
 INSERT INTO public.user_profiles (id, user_id, display_name, avatar_url, created_at, updated_at, current_car, favorite_shampoo, favorite_wax, favorite_tire_dressing, favorite_brand_id, email_verified) VALUES ('05371905-86be-4200-a2af-7e38aa3f1a84', '63bcd7bb-63e6-4b31-a338-cf06831572a1', 'Lucas Horst', NULL, '2026-07-14T02:58:41.625533+00:00', '2026-07-21T20:10:47.073411+00:00', 'BMW 320i', NULL, NULL, NULL, '932d8081-e1dc-49e9-921d-2524688ee6a1', true);
 
--- ============================================================
 -- COLLECTIONS
--- ============================================================
-
 -- collections (3 registros)
 
 INSERT INTO public.collections (id, slug, title, description, cover_image, display_order, is_featured, created_at) VALUES ('53e32497-6888-44d9-87ad-06cc65fdcbf9', 'kit-iniciante', 'Kit Iniciante', 'Tudo que você precisa para começar no mundo da estética automotiva sem desperdiçar dinheiro.', NULL, 1, true, '2026-07-16T22:46:32.729969+00:00');
 INSERT INTO public.collections (id, slug, title, description, cover_image, display_order, is_featured, created_at) VALUES ('e88fb8fb-c1d3-4266-965a-9d607fe27893', 'lavagem-rapida', 'Lavagem Rápida 15min', 'Produtos para uma lavagem eficiente quando o tempo está curto.', NULL, 2, true, '2026-07-16T22:46:32.729969+00:00');
 INSERT INTO public.collections (id, slug, title, description, cover_image, display_order, is_featured, created_at) VALUES ('8bd00dfd-b02d-4f8d-b50c-76a15741c99d', 'pro-grade', 'Pro Grade', 'Ferramentas e produtos usados por profissionais da estética automotiva.', NULL, 3, false, '2026-07-16T22:46:32.729969+00:00');
 
--- ============================================================
 -- COLLECTION ITEMS
--- ============================================================
-
 -- collection_items (11 registros)
 
 INSERT INTO public.collection_items (id, collection_id, product_id, display_order, note) VALUES ('3c26ad83-a745-4078-af0d-07cd35c85f3c', '53e32497-6888-44d9-87ad-06cc65fdcbf9', 'b31d52ff-cfe1-43cc-9173-bab2d3ec6625', 1, 'O shampoo é a base de tudo.');
@@ -323,45 +295,30 @@ INSERT INTO public.collection_items (id, collection_id, product_id, display_orde
 INSERT INTO public.collection_items (id, collection_id, product_id, display_order, note) VALUES ('483a8c02-ceb0-4535-88e1-08029fcbf7c4', '8bd00dfd-b02d-4f8d-b50c-76a15741c99d', 'bb812a11-3bd4-4541-b3c8-c787309b07ca', 2, NULL);
 INSERT INTO public.collection_items (id, collection_id, product_id, display_order, note) VALUES ('639f188e-7f14-48cc-9850-bff56fc8631c', '8bd00dfd-b02d-4f8d-b50c-76a15741c99d', 'f5048bd2-acc6-4084-9225-ff20f2f0f8f8', 3, NULL);
 
--- ============================================================
 -- GUIDES
--- ============================================================
-
 -- guides (2 registros)
 
 INSERT INTO public.guides (id, slug, title, description, cover_image, category_id, created_at) VALUES ('68882c95-a77d-4356-b5e9-13fffca69051', 'qual-cera-escolher', 'Qual cera ou selante escolher?', 'Descubra a proteção ideal para seu carro baseada no seu perfil de uso.', NULL, NULL, '2026-07-16T22:46:32.729969+00:00');
 INSERT INTO public.guides (id, slug, title, description, cover_image, category_id, created_at) VALUES ('306137bb-73c6-468b-afee-761ee92c74a0', 'qual-shampoo-usar', 'Qual shampoo usar?', 'Encontre o shampoo certo considerando seu tipo de lavagem e proteção atual.', NULL, NULL, '2026-07-16T22:46:32.729969+00:00');
 
--- ============================================================
 -- GUIDE PRODUCTS
--- ============================================================
-
 -- guide_products (3 registros)
 
 INSERT INTO public.guide_products (id, guide_id, product_id, match_label, display_order) VALUES ('1e6b98cd-90e9-415c-9e98-71922f57220d', '68882c95-a77d-4356-b5e9-13fffca69051', 'f5048bd2-acc6-4084-9225-ff20f2f0f8f8', 'Para uso semanal e brilho intenso', 1);
 INSERT INTO public.guide_products (id, guide_id, product_id, match_label, display_order) VALUES ('ae19092e-b903-4a9b-862a-32bc4377ca9a', '68882c95-a77d-4356-b5e9-13fffca69051', 'bb812a11-3bd4-4541-b3c8-c787309b07ca', 'Para proteção de longa duração (3+ meses)', 2);
 INSERT INTO public.guide_products (id, guide_id, product_id, match_label, display_order) VALUES ('4f10f511-5b6d-4b6c-b5ef-230b85b377b0', '306137bb-73c6-468b-afee-761ee92c74a0', 'b31d52ff-cfe1-43cc-9173-bab2d3ec6625', 'Para lavagem semanal com diluição econômica', 1);
 
--- ============================================================
 -- SPOTLIGHT
--- ============================================================
-
 -- spotlight (1 registros)
 
 INSERT INTO public.spotlight (id, product_id, week_start, editorial_text, created_at) VALUES ('4879138c-eb10-4983-9ca7-eaa739e0144e', '8c98c8a7-1635-40d8-aa67-ea39abb0e3a2', '2026-07-16', 'Este produto chamou nossa atenção pela combinação de performance, rendimento e custo-benefício. Uma daquelas descobertas que vira favorito rapidamente.', '2026-07-16T22:46:32.729969+00:00');
 
--- ============================================================
 -- CUSTOMER REVIEWS
--- ============================================================
-
 -- customer_reviews (1 registros)
 
 INSERT INTO public.customer_reviews (id, product_id, author_name, rating, title, comment, created_at, user_id, is_deleted, deleted_by, deleted_at) VALUES ('c20f5d98-0fbb-4e8c-a3e1-875684cf425f', '8c98c8a7-1635-40d8-aa67-ea39abb0e3a2', 'lucashorst@hotmail.com', 5, 'Teste', 'TesteTesteTesteTeste', '2026-07-17T16:11:49.568442+00:00', '63bcd7bb-63e6-4b31-a338-cf06831572a1', false, NULL, NULL);
 
--- ============================================================
 -- CATEGORY SLUG HISTORY
--- ============================================================
-
 -- category_slug_history (7 registros)
 
 INSERT INTO public.category_slug_history (id, category_id, slug, created_at) VALUES ('30fb79e0-1a7e-4d54-b2f2-c61aa7b0bf20', '330f3e55-c35d-411b-afff-3d2184e0f3b9', 'shampoos-limpeza', '2026-07-19T17:02:32.45277+00:00');
@@ -372,10 +329,7 @@ INSERT INTO public.category_slug_history (id, category_id, slug, created_at) VAL
 INSERT INTO public.category_slug_history (id, category_id, slug, created_at) VALUES ('e2f70a24-b241-4b80-a435-909c20b8387e', '8ef857d3-fd72-4595-8339-a4f25e83dab7', 'aromatizantes-perfumes', '2026-07-19T17:02:32.45277+00:00');
 INSERT INTO public.category_slug_history (id, category_id, slug, created_at) VALUES ('2c810d4d-16ce-4cb5-89b4-2b50807ef5f8', '330f3e55-c35d-411b-afff-3d2184e0f3b9', 'shampoo-e-limpeza-externa', '2026-07-20T00:44:19.410732+00:00');
 
--- ============================================================
 -- ADMIN AUDIT LOGS
--- ============================================================
-
 -- admin_audit_logs (14 registros)
 
 INSERT INTO public.admin_audit_logs (id, actor_id, actor_email, entity_type, entity_id, entity_label, action, changed_fields, previous_data, current_data, created_at) VALUES ('55add29a-62d0-430c-a5ba-6289e7b39ed0', '63bcd7bb-63e6-4b31-a338-cf06831572a1', 'lucashorst@hotmail.com', 'category', '8ef857d3-fd72-4595-8339-a4f25e83dab7', 'Aromatizantes', 'update', ARRAY['icon']::text[], '{"id": "8ef857d3-fd72-4595-8339-a4f25e83dab7", "icon": "🧴", "name": "Aromatizantes", "slug": "aromatizantes", "created_at": "2026-07-12T00:03:53.846287+00:00", "cover_image": null, "description": "Aromatizantes, perfumes e odorizadores para o interior do veículo.", "display_order": 8}'::jsonb, '{"id": "8ef857d3-fd72-4595-8339-a4f25e83dab7", "icon": "🌼", "name": "Aromatizantes", "slug": "aromatizantes", "created_at": "2026-07-12T00:03:53.846287+00:00", "cover_image": null, "description": "Aromatizantes, perfumes e odorizadores para o interior do veículo.", "display_order": 8}'::jsonb, '2026-07-21T20:14:52.063965+00:00');
@@ -393,10 +347,7 @@ INSERT INTO public.admin_audit_logs (id, actor_id, actor_email, entity_type, ent
 INSERT INTO public.admin_audit_logs (id, actor_id, actor_email, entity_type, entity_id, entity_label, action, changed_fields, previous_data, current_data, created_at) VALUES ('bcf996f7-a553-4f2f-b905-53ca0eddd5c9', '63bcd7bb-63e6-4b31-a338-cf06831572a1', 'lucashorst@hotmail.com', 'category', 'b1343dd8-ae32-4239-a176-6af36a42cb64', 'Acessórios e Ferramentas', 'update', ARRAY['icon']::text[], '{"id": "b1343dd8-ae32-4239-a176-6af36a42cb64", "icon": "wrench", "name": "Acessórios e Ferramentas", "slug": "acessorios-e-ferramentas", "created_at": "2026-07-19T17:02:32.45277+00:00", "cover_image": null, "description": null, "display_order": 7}'::jsonb, '{"id": "b1343dd8-ae32-4239-a176-6af36a42cb64", "icon": "🔧", "name": "Acessórios e Ferramentas", "slug": "acessorios-e-ferramentas", "created_at": "2026-07-19T17:02:32.45277+00:00", "cover_image": null, "description": null, "display_order": 7}'::jsonb, '2026-07-21T02:32:37.976781+00:00');
 INSERT INTO public.admin_audit_logs (id, actor_id, actor_email, entity_type, entity_id, entity_label, action, changed_fields, previous_data, current_data, created_at) VALUES ('9f13844b-e93b-4cdc-ae4b-7770ec0c9e3c', '63bcd7bb-63e6-4b31-a338-cf06831572a1', 'lucashorst@hotmail.com', 'product', '8c98c8a7-1635-40d8-aa67-ea39abb0e3a2', 'MELON Shampoo Automotivo Super Concentrado EasyTech 5L', 'update', ARRAY['image_url']::text[], '{"id": "8c98c8a7-1635-40d8-aa67-ea39abb0e3a2", "name": "MELON Shampoo Automotivo Super Concentrado EasyTech 5L", "slug": "melon-shampoo-easytech-5l", "tags": [], "tips": null, "is_new": false, "rating": 5, "status": "published", "brand_id": "16ed7769-be17-4581-8fbd-90a4d5d6499b", "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/melon_shampoo_automotivo_neutro_super_concentrado_1_20260610213915_50a258af2315.jpg", "usability": null, "created_at": "2026-07-12T00:05:02.697657+00:00", "publish_at": null, "category_id": "330f3e55-c35d-411b-afff-3d2184e0f3b9", "description": "O MELON é super concentrado, com alto poder de limpeza mesmo diluído em 1:400. pH neutro, promove alta lubrificação e brilho, sem remover ceras ou selantes. Ideal para uso profissional e hobista, oferece rendimento excepcional.", "is_featured": true, "published_at": "2026-07-12T01:41:14.20673+00:00", "review_count": 5, "variant_label": null, "gallery_images": [], "specifications": {"pH": "Neutro", "Marca": "EasyTech", "Volume": "5 Litros", "Diluição": "1:400"}, "parent_product_id": null, "short_description": "O melhor shampoo automotivo já produzido no Brasil. Super concentrado com diluição 1:400."}'::jsonb, '{"id": "8c98c8a7-1635-40d8-aa67-ea39abb0e3a2", "name": "MELON Shampoo Automotivo Super Concentrado EasyTech 5L", "slug": "melon-shampoo-easytech-5l", "tags": [], "tips": null, "is_new": false, "rating": 5, "status": "published", "brand_id": "16ed7769-be17-4581-8fbd-90a4d5d6499b", "image_url": "https://lmcaizvlzmppfphmavbo.supabase.co/storage/v1/object/public/product-images/products/8c98c8a7-1635-40d8-aa67-ea39abb0e3a2/63ff9413-86de-4dee-ac60-161c005c84c9.jpg", "usability": null, "created_at": "2026-07-12T00:05:02.697657+00:00", "publish_at": null, "category_id": "330f3e55-c35d-411b-afff-3d2184e0f3b9", "description": "O MELON é super concentrado, com alto poder de limpeza mesmo diluído em 1:400. pH neutro, promove alta lubrificação e brilho, sem remover ceras ou selantes. Ideal para uso profissional e hobista, oferece rendimento excepcional.", "is_featured": true, "published_at": "2026-07-12T01:41:14.20673+00:00", "review_count": 5, "variant_label": null, "gallery_images": [], "specifications": {"pH": "Neutro", "Marca": "EasyTech", "Volume": "5 Litros", "Diluição": "1:400"}, "parent_product_id": null, "short_description": "O melhor shampoo automotivo já produzido no Brasil. Super concentrado com diluição 1:400."}'::jsonb, '2026-07-18T06:08:03.472357+00:00');
 
--- ============================================================
 -- SEARCH DOCUMENTS
--- ============================================================
-
 -- search_documents (105 registros)
 
 INSERT INTO public.search_documents (id, entity_type, entity_id, title, subtitle, short_description, search_text, keywords, slug, status, publish_at, image_url, rating, review_count, is_new, updated_at) VALUES ('cddf907a-db97-4a23-8d42-53ab0a2af2d6', 'product', '001f1af8-f6d2-432f-bf7f-ca3c7ff54caa', 'Acidus Fast Limpador de Uso Geral Uso Externo Vonixx 500ml', 'Vonixx', NULL, 'Vonixx Limpeza Interna', '{}'::text[], 'acidus-fast-limpador-de-uso-geral-uso-externo-vonixx-500ml', 'published', NULL, 'https://images.tcdn.com.br/img/img_prod/1152560/acidus_fast_limpador_de_uso_geral_uso_externo_vo_1_20251015005351_7ceb989344b8.jpg', 0, 0, false, '2026-07-19T17:02:32.45277+00:00');

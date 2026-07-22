@@ -1,6 +1,4 @@
--- ============================================================
--- CHAVES ESTRANGEIRAS (Foreign Keys)
--- ============================================================
+-- CHAVES ESTRANGEIRAS E UNIQUE - Papo Detailer - 2026-07-22
 
 ALTER TABLE public.affiliate_clicks ADD CONSTRAINT affiliate_clicks_affiliate_link_id_fkey FOREIGN KEY (affiliate_link_id) REFERENCES public.affiliate_links(id);
 ALTER TABLE public.affiliate_clicks ADD CONSTRAINT affiliate_clicks_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id);
@@ -22,15 +20,13 @@ ALTER TABLE public.products ADD CONSTRAINT products_parent_product_id_fkey FOREI
 ALTER TABLE public.spotlight ADD CONSTRAINT spotlight_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id);
 ALTER TABLE public.user_profiles ADD CONSTRAINT user_profiles_favorite_brand_id_fkey FOREIGN KEY (favorite_brand_id) REFERENCES public.brands(id);
 
--- ============================================================
--- CONSTRAINTS UNIQUE
--- ============================================================
+-- UNIQUE
 
 ALTER TABLE public.admin_users ADD CONSTRAINT admin_users_user_id_key UNIQUE (user_id);
 ALTER TABLE public.banned_users ADD CONSTRAINT banned_users_user_id_key UNIQUE (user_id);
 ALTER TABLE public.brands ADD CONSTRAINT brands_slug_key UNIQUE (slug);
 ALTER TABLE public.categories ADD CONSTRAINT categories_slug_key UNIQUE (slug);
-ALTER TABLE public.collection_items ADD CONSTRAINT collection_items_collection_id_product_id_key UNIQUE (collection_id);
+ALTER TABLE public.collection_items ADD CONSTRAINT collection_items_collection_id_product_id_key UNIQUE (product_id);
 ALTER TABLE public.collections ADD CONSTRAINT collections_slug_key UNIQUE (slug);
 ALTER TABLE public.guide_products ADD CONSTRAINT guide_products_guide_id_product_id_key UNIQUE (product_id);
 ALTER TABLE public.guides ADD CONSTRAINT guides_slug_key UNIQUE (slug);

@@ -1,0 +1,1 @@
+export const SITE = { name: 'PapoDetailer', tagline: 'Portal de Estética Automotiva', description: 'A biblioteca brasileira de produtos para estética automotiva.', url: 'https://papodetailer.com.br', social: { instagram: 'https://instagram.com/papodetailer', youtube: 'https://youtube.com/@papodetailer', whatsapp: 'https://wa.me/5511999999999' } };
