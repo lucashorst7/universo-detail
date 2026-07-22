@@ -1,39 +1,48 @@
-import { Link, NavLink } from 'react-router-dom'
-import { Package, Tag, UsersThree, Star, Scroll, House } from '@phosphor-icons/react'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { LayoutDashboard, Package, Tag, FolderTree, Star, Users, LogOut } from 'lucide-react'
+import { useAuth } from '../lib/auth'
+import './admin.css'
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export function AdminLayout() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { signOut } = useAuth()
+
+  const links = [
+    { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+    { to: '/admin/produtos', label: 'Produtos', icon: Package },
+    { to: '/admin/marcas', label: 'Marcas', icon: Tag },
+    { to: '/admin/categorias', label: 'Categorias', icon: FolderTree },
+    { to: '/admin/avaliacoes', label: 'Avaliações', icon: Star },
+    { to: '/admin/membros', label: 'Membros', icon: Users },
+  ]
+
+  function isActive(to: string, end?: boolean) {
+    return end ? location.pathname === to : location.pathname.startsWith(to)
+  }
+
   return (
-    <div className="admin-layout">
+    <div className="admin-shell">
       <aside className="admin-sidebar">
-        <div className="admin-sidebar-header">
-          <Link to="/" className="logo">
-            <span className="logo-mark">P</span>
-            <span className="logo-text">PapoDetailer</span>
-          </Link>
-          <span className="admin-badge">Admin</span>
+        <div className="admin-sidebar-head">
+          <Link to="/admin" className="admin-logo">Universo Detail</Link>
+          <span className="admin-sub">Painel administrativo</span>
         </div>
         <nav className="admin-nav">
-          <NavLink to="/admin" end className={({ isActive }) => `admin-nav-link${isActive ? ' active' : ''}`}>
-            <House size={18} weight="regular" /><span>Dashboard</span>
-          </NavLink>
-          <NavLink to="/admin/produtos" className={({ isActive }) => `admin-nav-link${isActive ? ' active' : ''}`}>
-            <Package size={18} weight="regular" /><span>Produtos</span>
-          </NavLink>
-          <NavLink to="/admin/marcas" className={({ isActive }) => `admin-nav-link${isActive ? ' active' : ''}`}>
-            <Tag size={18} weight="regular" /><span>Marcas</span>
-          </NavLink>
-          <NavLink to="/admin/categorias" className={({ isActive }) => `admin-nav-link${isActive ? ' active' : ''}`}>
-            <UsersThree size={18} weight="regular" /><span>Categorias</span>
-          </NavLink>
-          <NavLink to="/admin/reviews" className={({ isActive }) => `admin-nav-link${isActive ? ' active' : ''}`}>
-            <Star size={18} weight="regular" /><span>Reviews</span>
-          </NavLink>
-          <NavLink to="/admin/guia-editorial" className={({ isActive }) => `admin-nav-link${isActive ? ' active' : ''}`}>
-            <Scroll size={18} weight="regular" /><span>Editorial</span>
-          </NavLink>
+          {links.map((l) => (
+            <Link key={l.to} to={l.to} className={`admin-nav-link ${isActive(l.to, l.end) ? 'active' : ''}`}>
+              <l.icon size={18} /><span>{l.label}</span>
+            </Link>
+          ))}
         </nav>
+        <div className="admin-sidebar-foot">
+          <Link to="/" className="admin-nav-link"><LogOut size={18} /><span>Ver site</span></Link>
+          <button className="admin-nav-link" onClick={async () => { await signOut(); navigate('/login') }}>
+            <LogOut size={18} /><span>Sair</span>
+          </button>
+        </div>
       </aside>
-      <main className="admin-main">{children}</main>
+      <main className="admin-main"><Outlet /></main>
     </div>
   )
 }

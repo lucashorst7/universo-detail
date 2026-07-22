@@ -1,32 +1,3 @@
-import {
-  Drop,
-  Armchair,
-  Shield,
-  Eye,
-  Sparkle,
-  Gear,
-  Tire,
-  SprayBottle,
-  Package,
-  type IconProps,
-} from '@phosphor-icons/react'
-import type { ComponentType } from 'react'
-
-const iconMap: Record<string, ComponentType<IconProps>> = {
-  drop: Drop,
-  armchair: Armchair,
-  shield: Shield,
-  eye: Eye,
-  sparkle: Sparkle,
-  gear: Gear,
-  tire: Tire,
-  'spray-bottle': SprayBottle,
-  package: Package,
-}
-
-export function getCategoryIcon(iconName: string | null | undefined) {
-  if (!iconName || !iconMap[iconName]) return Package
-  return iconMap[iconName]
-}
-
-export { Package }
+import { Droplets, Sparkles, Wand2, Armchair, CircleDot, Eye, SprayCan, Package, type LucideIcon } from 'lucide-react';
+const map: Record<string, LucideIcon> = { 'droplets': Droplets, 'shield': Sparkles, 'sparkles': Wand2, 'armchair': Armchair, 'circle': CircleDot, 'eye': Eye, 'spray-can': SprayCan, 'shampoo': Droplets, 'shampoos-limpeza': Droplets, 'ceras-selantes': Sparkles, 'polimentos-compounds': Wand2, 'detalhamento-interno': Armchair, 'pneus-rodas': CircleDot, 'vidros-cristalizadores': Eye, 'aromatizantes-perfumes': SprayCan };
+export function getCategoryIcon(iconName: string): LucideIcon { return map[iconName?.toLowerCase()] || Package; }
