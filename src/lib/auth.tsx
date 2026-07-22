@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
 
-  const emailVerified = Boolean(profile?.email_verified)
+  const emailVerified = Boolean(session?.user?.email_confirmed_at)
 
   useEffect(() => {
     if (!isConfigured) { setLoading(false); return }

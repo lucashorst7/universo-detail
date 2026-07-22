@@ -18,19 +18,6 @@ export function VerifyEmailPage() {
 
   useEffect(() => {
     inputsRef.current[0]?.focus()
-    void (async () => {
-      try {
-        const { data } = await supabase.auth.getSession()
-        if (data.session && !email) {
-          const sessionEmail = data.session.user.email ?? ''
-          if (sessionEmail) {
-            await supabase.rpc('mark_email_verified')
-            await refreshProfile()
-            navigate('/')
-          }
-        }
-      } catch { /* best-effort */ }
-    })()
   }, [])
 
   useEffect(() => {
@@ -84,7 +71,6 @@ export function VerifyEmailPage() {
       return
     }
     try {
-      await supabase.rpc('mark_email_verified')
       await refreshProfile()
     } catch { /* profile refresh best-effort */ }
     setSuccess('E-mail verificado com sucesso!')
