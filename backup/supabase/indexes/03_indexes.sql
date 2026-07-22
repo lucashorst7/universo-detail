@@ -1,0 +1,58 @@
+-- ============================================================
+-- ÍNDICES
+-- ============================================================
+
+CREATE INDEX admin_audit_logs_actor_idx ON public.admin_audit_logs USING btree (actor_id, created_at DESC);
+CREATE INDEX admin_audit_logs_created_at_idx ON public.admin_audit_logs USING btree (created_at DESC);
+CREATE INDEX admin_audit_logs_entity_idx ON public.admin_audit_logs USING btree (entity_type, entity_id, created_at DESC);
+CREATE UNIQUE INDEX admin_users_user_id_key ON public.admin_users USING btree (user_id);
+CREATE INDEX affiliate_clicks_clicked_at_idx ON public.affiliate_clicks USING btree (clicked_at DESC);
+CREATE INDEX affiliate_clicks_link_clicked_at_idx ON public.affiliate_clicks USING btree (affiliate_link_id, clicked_at DESC);
+CREATE INDEX affiliate_clicks_product_clicked_at_idx ON public.affiliate_clicks USING btree (product_id, clicked_at DESC);
+CREATE INDEX affiliate_links_product_id_idx ON public.affiliate_links USING btree (product_id);
+CREATE UNIQUE INDEX banned_users_user_id_key ON public.banned_users USING btree (user_id);
+CREATE INDEX idx_banned_users_user_id ON public.banned_users USING btree (user_id);
+CREATE INDEX brand_slug_history_brand_idx ON public.brand_slug_history USING btree (brand_id, created_at DESC);
+CREATE UNIQUE INDEX brand_slug_history_slug_unique_idx ON public.brand_slug_history USING btree (lower(slug));
+CREATE UNIQUE INDEX brands_slug_key ON public.brands USING btree (slug);
+CREATE UNIQUE INDEX categories_slug_key ON public.categories USING btree (slug);
+CREATE INDEX category_slug_history_category_idx ON public.category_slug_history USING btree (category_id, created_at DESC);
+CREATE UNIQUE INDEX category_slug_history_slug_unique_idx ON public.category_slug_history USING btree (lower(slug));
+CREATE UNIQUE INDEX collection_items_collection_id_product_id_key ON public.collection_items USING btree (collection_id, product_id);
+CREATE INDEX idx_collection_items_collection ON public.collection_items USING btree (collection_id);
+CREATE INDEX idx_collection_items_product ON public.collection_items USING btree (product_id);
+CREATE UNIQUE INDEX collections_slug_key ON public.collections USING btree (slug);
+CREATE INDEX customer_reviews_created_at_idx ON public.customer_reviews USING btree (created_at DESC);
+CREATE INDEX customer_reviews_product_idx ON public.customer_reviews USING btree (product_id, created_at DESC);
+CREATE INDEX idx_customer_reviews_is_deleted ON public.customer_reviews USING btree (is_deleted);
+CREATE INDEX idx_customer_reviews_product_id ON public.customer_reviews USING btree (product_id);
+CREATE INDEX idx_customer_reviews_user_id ON public.customer_reviews USING btree (user_id);
+CREATE UNIQUE INDEX guide_products_guide_id_product_id_key ON public.guide_products USING btree (guide_id, product_id);
+CREATE INDEX idx_guide_products_guide ON public.guide_products USING btree (guide_id);
+CREATE UNIQUE INDEX guides_slug_key ON public.guides USING btree (slug);
+CREATE INDEX idx_product_categories_category_id ON public.product_categories USING btree (category_id);
+CREATE INDEX idx_product_categories_product_id ON public.product_categories USING btree (product_id);
+CREATE INDEX product_slug_history_product_idx ON public.product_slug_history USING btree (product_id, created_at DESC);
+CREATE UNIQUE INDEX product_slug_history_slug_unique_idx ON public.product_slug_history USING btree (lower(slug));
+CREATE INDEX idx_products_parent_id ON public.products USING btree (parent_product_id);
+CREATE INDEX products_brand_id_idx ON public.products USING btree (brand_id);
+CREATE INDEX products_category_id_idx ON public.products USING btree (category_id);
+CREATE INDEX products_publication_idx ON public.products USING btree (status, publish_at, published_at DESC);
+CREATE INDEX products_slug_idx ON public.products USING btree (slug);
+CREATE UNIQUE INDEX products_slug_key ON public.products USING btree (slug);
+CREATE INDEX products_status_created_idx ON public.products USING btree (status, created_at DESC);
+CREATE INDEX products_tags_idx ON public.products USING gin (tags);
+CREATE INDEX runtime_error_logs_created_at_idx ON public.runtime_error_logs USING btree (created_at DESC);
+CREATE UNIQUE INDEX runtime_error_logs_incident_code_key ON public.runtime_error_logs USING btree (incident_code);
+CREATE INDEX runtime_error_logs_source_created_at_idx ON public.runtime_error_logs USING btree (source, created_at DESC);
+CREATE UNIQUE INDEX search_documents_entity_unique ON public.search_documents USING btree (entity_type, entity_id);
+CREATE UNIQUE INDEX search_documents_slug_unique ON public.search_documents USING btree (entity_type, slug);
+CREATE INDEX search_documents_title_trgm_idx ON public.search_documents USING gin (title gin_trgm_ops);
+CREATE INDEX search_documents_updated_at_idx ON public.search_documents USING btree (updated_at DESC);
+CREATE INDEX search_insights_query_time_idx ON public.search_insights USING btree (query_normalized, searched_at DESC);
+CREATE INDEX search_insights_searched_at_idx ON public.search_insights USING btree (searched_at DESC);
+CREATE INDEX search_insights_zero_results_idx ON public.search_insights USING btree (searched_at DESC, query_normalized) WHERE (result_count = 0);
+CREATE INDEX idx_spotlight_week ON public.spotlight USING btree (week_start DESC);
+CREATE INDEX idx_user_profiles_favorite_brand_id ON public.user_profiles USING btree (favorite_brand_id) WHERE (favorite_brand_id IS NOT NULL);
+CREATE INDEX idx_user_profiles_user_id ON public.user_profiles USING btree (user_id);
+CREATE UNIQUE INDEX user_profiles_user_id_key ON public.user_profiles USING btree (user_id);
