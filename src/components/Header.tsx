@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Search, ChevronDown, User, LayoutDashboard, LogOut, Menu, X, Droplet, Armchair, Shield, Eye, Sparkles, CircleDot, Wrench, SprayCan, Package, type LucideIcon } from 'lucide-react'
+import { Search, ChevronDown, User, LayoutDashboard, LogOut, Menu, X, Droplet, Armchair, Shield, Eye, Sparkles, CircleDot, Wrench, SprayCan, Package, Calculator, type LucideIcon } from 'lucide-react'
 import { useAuth } from '../lib/auth'
 import type { Category } from '../types/database'
 import './header.css'
@@ -100,6 +100,7 @@ export function Header({ categories }: { categories: Category[] }) {
           </div>
           <Link to="/produtos" className="nav-link">Produtos</Link>
           <Link to="/marcas" className="nav-link">Marcas</Link>
+          <Link to="/calculadora" className="nav-link"><Calculator size={16} /> Calculadora</Link>
         </nav>
         <form className="header-search" onSubmit={submitSearch}>
           <Search size={16} className="search-icon" />
@@ -145,6 +146,7 @@ export function Header({ categories }: { categories: Category[] }) {
           )}
           <Link to="/produtos" className="mobile-link">Produtos</Link>
           <Link to="/marcas" className="mobile-link">Marcas</Link>
+          <Link to="/calculadora" className="mobile-link"><Calculator size={16} /> Calculadora</Link>
           <form className="mobile-search" onSubmit={submitSearch}>
             <Search size={16} />
             <input type="text" placeholder="Buscar produtos..." value={query} onChange={(e) => setQuery(e.target.value)} />

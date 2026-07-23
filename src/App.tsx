@@ -14,6 +14,7 @@ import { ProductDetailPage } from './pages/ProductDetailPage'
 import { CategoryPage } from './pages/CategoryPage'
 import { BrandPage } from './pages/BrandPage'
 import { BrandsPage } from './pages/BrandsPage'
+import { CalculatorPage } from './pages/CalculatorPage'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { VerifyEmailPage } from './pages/VerifyEmailPage'
@@ -69,6 +70,7 @@ const router = createBrowserRouter([
       { path: '/categoria/:slug', element: <CategoryPage /> },
       { path: '/marca/:slug', element: <BrandPage /> },
       { path: '/marcas', element: <BrandsPage /> },
+      { path: '/calculadora', element: <CalculatorPage /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/cadastro', element: <RegisterPage /> },
       { path: '/verificar-email', element: <VerifyEmailPage /> },
