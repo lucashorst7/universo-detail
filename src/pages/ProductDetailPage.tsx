@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { Edit2 } from 'lucide-react'
 import { fetchProductBySlug, fetchReviewsByProduct } from '../lib/queries'
 import { Spinner, ErrorState, EmptyState } from '../components/Feedback'
 import { Rating } from '../components/Badge'
@@ -16,7 +17,7 @@ export function ProductDetailPage() {
   const [reviews, setReviews] = useState<CustomerReview[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const { session, profile, emailVerified } = useAuth()
+  const { session, profile, emailVerified, isAdmin } = useAuth()
 
   useEffect(() => {
     if (!slug) return
@@ -56,6 +57,11 @@ export function ProductDetailPage() {
           {product.category && <span className="product-detail-cat">{product.category.name}</span>}
           <h1>{product.name}</h1>
           {product.brand && <Link to={`/marca/${product.brand.slug}`} className="product-detail-brand">{product.brand.name}</Link>}
+          {isAdmin && (
+            <Link to={`/admin/produtos?edit=${product.id}`} className="product-detail-edit-btn">
+              <Edit2 size={14} /> Editar produto
+            </Link>
+          )}
           {reviews.length > 0 && <Rating value={avg} count={reviews.length} size={18} />}
           {product.short_description && <p className="product-detail-short">{product.short_description}</p>}
           {product.description && <p className="product-detail-desc">{product.description}</p>}

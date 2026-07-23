@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Plus, Edit2, Trash2 } from 'lucide-react'
 import { supabase, isConfigured } from '../../lib/supabase'
 import { Spinner, EmptyState } from '../../components/Feedback'
@@ -35,6 +36,22 @@ export function AdminProductsPage() {
   }
 
   useEffect(() => { load() }, [])
+
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  useEffect(() => {
+    if (loading || products.length === 0) return
+    const editId = searchParams.get('edit')
+    if (!editId) return
+    const product = products.find(p => p.id === editId)
+    if (product) {
+      openEdit(product)
+    } else {
+      setToast({ msg: 'Produto não encontrado.', type: 'error' })
+    }
+    searchParams.delete('edit')
+    setSearchParams(searchParams, { replace: true })
+  }, [loading, products, searchParams, setSearchParams])
 
   function openCreate() {
     setEditing(null)
