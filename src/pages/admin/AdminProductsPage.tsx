@@ -17,7 +17,7 @@ export function AdminProductsPage() {
   const [editing, setEditing] = useState<Product | null>(null)
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null)
-  const [form, setForm] = useState({ name: '', slug: '', description: '', brand_id: '', category_id: '', status: 'draft', image_url: '' })
+  const [form, setForm] = useState({ name: '', slug: '', description: '', brand_id: '', category_id: '', status: 'draft', image_url: '', mercado_livre_url: '', shopee_url: '', amazon_url: '' })
   const [techSpecs, setTechSpecs] = useState<Record<string, unknown>>({})
   const [volumetries, setVolumetries] = useState<string[]>([])
   const [subtype, setSubtype] = useState('')
@@ -55,7 +55,7 @@ export function AdminProductsPage() {
 
   function openCreate() {
     setEditing(null)
-    setForm({ name: '', slug: '', description: '', brand_id: '', category_id: '', status: 'draft', image_url: '' })
+    setForm({ name: '', slug: '', description: '', brand_id: '', category_id: '', status: 'draft', image_url: '', mercado_livre_url: '', shopee_url: '', amazon_url: '' })
     setTechSpecs({})
     setVolumetries([])
     setSubtype('')
@@ -64,7 +64,7 @@ export function AdminProductsPage() {
 
   function openEdit(p: Product) {
     setEditing(p)
-    setForm({ name: p.name, slug: p.slug, description: p.description ?? '', brand_id: p.brand_id ?? '', category_id: p.category_id ?? '', status: p.status, image_url: p.image_url ?? '' })
+    setForm({ name: p.name, slug: p.slug, description: p.description ?? '', brand_id: p.brand_id ?? '', category_id: p.category_id ?? '', status: p.status, image_url: p.image_url ?? '', mercado_livre_url: p.mercado_livre_url ?? '', shopee_url: p.shopee_url ?? '', amazon_url: p.amazon_url ?? '' })
     setTechSpecs((p.technical_specs as Record<string, unknown>) ?? {})
     setVolumetries(p.volumetries ?? [])
     setSubtype((p.technical_specs as Record<string, unknown>)?.product_subtype as string ?? '')
@@ -99,8 +99,22 @@ export function AdminProductsPage() {
     setTechSpecs({})
   }
 
+  function isValidUrl(value: string): boolean {
+    if (!value) return true
+    try { const u = new URL(value); return u.protocol === 'http:' || u.protocol === 'https:' } catch { return false }
+  }
+  function cleanUrl(value: string): string { return value.trim() }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    const ml = cleanUrl(form.mercado_livre_url)
+    const sh = cleanUrl(form.shopee_url)
+    const am = cleanUrl(form.amazon_url)
+    const urlErrors: string[] = []
+    if (ml && !isValidUrl(ml)) urlErrors.push('Link do Mercado Livre inválido.')
+    if (sh && !isValidUrl(sh)) urlErrors.push('Link da Shopee inválido.')
+    if (am && !isValidUrl(am)) urlErrors.push('Link da Amazon inválido.')
+    if (urlErrors.length > 0) { setToast({ msg: urlErrors.join(' '), type: 'error' }); return }
     const finalTechSpecs: Record<string, unknown> = { ...techSpecs }
     if (categorySpec?.hasSubtype && subtype) { finalTechSpecs.product_subtype = subtype }
     const payload = {
@@ -113,6 +127,9 @@ export function AdminProductsPage() {
       image_url: form.image_url || null,
       technical_specs: finalTechSpecs,
       volumetries: volumetries.length > 0 ? volumetries : null,
+      mercado_livre_url: ml || null,
+      shopee_url: sh || null,
+      amazon_url: am || null,
     }
     if (editing) {
       const { error } = await supabase.from('products').update(payload).eq('id', editing.id)
@@ -172,6 +189,11 @@ export function AdminProductsPage() {
           )}
           <div className="form-group"><label>Status</label><select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}><option value="draft">Rascunho</option><option value="published">Publicado</option></select></div>
           <div className="form-group"><label>URL da imagem</label><input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} /></div>
+          <div className="admin-form-row">
+            <div className="form-group"><label>Link do Mercado Livre</label><input type="url" value={form.mercado_livre_url} onChange={(e) => setForm({ ...form, mercado_livre_url: e.target.value })} placeholder="https://..." /></div>
+            <div className="form-group"><label>Link da Shopee</label><input type="url" value={form.shopee_url} onChange={(e) => setForm({ ...form, shopee_url: e.target.value })} placeholder="https://..." /></div>
+          </div>
+          <div className="form-group"><label>Link da Amazon</label><input type="url" value={form.amazon_url} onChange={(e) => setForm({ ...form, amazon_url: e.target.value })} placeholder="https://..." /></div>
           <button type="submit" className="btn btn-primary">{editing ? 'Salvar' : 'Criar'}</button>
         </form>
       </Modal>

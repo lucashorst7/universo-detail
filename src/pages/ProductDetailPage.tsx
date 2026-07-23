@@ -9,6 +9,7 @@ import { getCategorySpec, getFieldsForCategoryAndSubtype } from '../lib/category
 import { useAuth } from '../lib/auth'
 import { supabase } from '../lib/supabase'
 import type { ProductWithRelations, CustomerReview } from '../types/database'
+import { MarketplaceLinks } from '../components/MarketplaceLinks'
 import './product-detail.css'
 
 export function ProductDetailPage() {
@@ -85,6 +86,7 @@ export function ProductDetailPage() {
           </div>
         )}
       </section>
+      <MarketplaceLinks product={product} />
     </div>
   )
 }

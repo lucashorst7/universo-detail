@@ -28,6 +28,9 @@ export interface Database {
           published_at: string | null
           parent_product_id: string | null
           variant_label: string | null
+          mercado_livre_url: string | null
+          shopee_url: string | null
+          amazon_url: string | null
         }
         Insert: {
           id?: string
@@ -53,6 +56,9 @@ export interface Database {
           published_at?: string | null
           parent_product_id?: string | null
           variant_label?: string | null
+          mercado_livre_url?: string | null
+          shopee_url?: string | null
+          amazon_url?: string | null
         }
         Update: Partial<Database['public']['Tables']['products']['Insert']>
       }
