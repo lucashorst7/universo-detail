@@ -30,8 +30,6 @@
 .techspecs-dilution-row input:focus { outline: none; border-color: var(--color-primary); }
 .techspecs-dilution-remove { background: none; border: none; color: var(--color-error); padding: 4px; cursor: pointer; display: flex; }
 .techspecs-dilution-remove:hover { opacity: 0.8; }
-
-/* Display on product page */
 .techspecs-display { display: flex; flex-direction: column; gap: 0; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; }
 .techspecs-display-head { background: var(--color-bg-2); border-bottom: 1px solid var(--color-border); padding: 14px 20px; }
 .techspecs-display-head h2 { font-size: 18px; font-weight: 700; color: var(--color-primary); }

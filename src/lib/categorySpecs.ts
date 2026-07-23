@@ -8,26 +8,18 @@ export interface SpecField {
   unit?: string
   placeholder?: string
   help?: string
-  /** Only show this field when the subtype matches one of these values */
   showOnSubtypes?: string[]
-  /** Only show this field when the product_type select value matches one of these values */
   showOnProductType?: string[]
 }
 
 export interface CategorySpec {
-  /** Category slug */
   slug: string
-  /** Whether this category uses subtypes */
   hasSubtype: boolean
-  /** Subtype field key (always "product_subtype" when hasSubtype is true) */
   subtypeLabel?: string
-  /** Subtype options */
   subtypeOptions?: string[]
-  /** Fields for this category (excluding subtype, which is handled separately) */
   fields: SpecField[]
 }
 
-/* ── Categoria 1 — Acessórios e Ferramentas ── */
 const acessorios: CategorySpec = {
   slug: 'acessorios-e-ferramentas',
   hasSubtype: false,
@@ -37,7 +29,6 @@ const acessorios: CategorySpec = {
   ],
 }
 
-/* ── Categoria 2 — Aromatizadores ── */
 const aromatizantes: CategorySpec = {
   slug: 'aromatizantes',
   hasSubtype: false,
@@ -56,12 +47,11 @@ const aromatizantes: CategorySpec = {
   ],
 }
 
-/* ── Categoria 3 — Ceras e Selantes ── */
 const cerasSelantes: CategorySpec = {
   slug: 'ceras-e-selantes',
   hasSubtype: false,
   fields: [
-    { key: 'product_type', label: 'Tipo de produto', type: 'select', options: ['Cera de carnaúba', 'Cera sintética', 'Cera híbrida', 'Cera líquida', 'Cera em pasta', 'Cera spray', 'Selante de pintura', 'Selante de vidros', 'Selante para plásticos', 'Manutenção de vitrificador', 'Outro'] },
+    { key: 'product_type', label: 'Tipo de produto', type: 'select', options: ['Cere de carnaúba', 'Cere sintética', 'Cere híbrida', 'Cere líquida', 'Cere em pasta', 'Cere spray', 'Selante de pintura', 'Selante de vidros', 'Selante para plásticos', 'Manutenção de vitrificador', 'Outro'] },
     { key: 'application_surface', label: 'Superfície de aplicação', type: 'multiselect', options: ['Pintura', 'Vidros', 'Plásticos', 'Faróis', 'Rodas', 'Superfícies cromadas', 'Outro'] },
     { key: 'technology', label: 'Tecnologia ou base principal', type: 'select', options: ['Carnaúba', 'Polímeros sintéticos', 'Sílica ou SiO₂', 'Fórmula híbrida', 'Não informado'] },
     { key: 'finish', label: 'Acabamento proporcionado', type: 'multiselect', options: ['Brilho intenso', 'Efeito molhado', 'Profundidade de cor', 'Toque liso', 'Acabamento natural', 'Repelência à água', 'Outro'] },
@@ -80,12 +70,11 @@ const cerasSelantes: CategorySpec = {
   ],
 }
 
-/* ── Categoria 4 — Limpeza de Vidros ── */
 const limpezaVidros: CategorySpec = {
   slug: 'limpeza-de-vidros',
   hasSubtype: false,
   fields: [
-    { key: 'product_type', label: 'Tipo de produto', type: 'select', options: ['Limpa-vidros', 'Desengordurante para vidros', 'Removedor de marcas d\'água', 'Removedor de resíduos minerais', 'Antiembaçante', 'Limpador de películas', 'Outro'] },
+    { key: 'product_type', label: 'Tipo de produto', type: 'select', options: ['Limpa-vidros', 'Desengordurante para vidros', 'Removedor de marcas dágua', 'Removedor de resíduos minerais', 'Antiembaçante', 'Limpador de películas', 'Outro'] },
     { key: 'usage_area', label: 'Área de utilização', type: 'select', options: ['Vidros internos', 'Vidros externos', 'Uso interno e externo'] },
     { key: 'ready_to_use', label: 'Produto pronto para uso ou concentrado', type: 'select', options: ['Pronto para uso', 'Concentrado', 'Não informado'] },
     { key: 'ph', label: 'pH', type: 'text', placeholder: 'Ex: 7.0 ou Não informado' },
@@ -93,7 +82,7 @@ const limpezaVidros: CategorySpec = {
     { key: 'ammonia', label: 'Contém amônia', type: 'select', options: ['Sim', 'Não', 'Não informado'] },
     { key: 'film_compat', label: 'Compatível com películas automotivas', type: 'select', options: ['Sim', 'Não', 'Exige teste prévio', 'Não informado'] },
     { key: 'surface_compat', label: 'Compatibilidade com superfícies', type: 'multiselect', options: ['Vidros', 'Espelhos', 'Películas', 'Acrílico', 'Policarbonato', 'Telas', 'Outro'] },
-    { key: 'dirt_type', label: 'Tipo de sujeira removida', type: 'multiselect', options: ['Gordura', 'Marcas de dedos', 'Fumaça', 'Nicotina', 'Poeira', 'Resíduos de insetos', 'Marcas d\'água', 'Contaminação mineral', 'Outro'] },
+    { key: 'dirt_type', label: 'Tipo de sujeira removida', type: 'multiselect', options: ['Gordura', 'Marcas de dedos', 'Fumaça', 'Nicotina', 'Poeira', 'Resíduos de insetos', 'Marcas dágua', 'Contaminação mineral', 'Outro'] },
     { key: 'antifog', label: 'Possui efeito antiembaçante', type: 'select', options: ['Sim', 'Não', 'Não informado'] },
     { key: 'residue', label: 'Deixa resíduos ou manchas', type: 'select', options: ['Não deixa resíduos quando utilizado corretamente', 'Pode exigir acabamento com microfibra seca', 'Não informado'] },
     { key: 'action_time', label: 'Tempo de ação', type: 'text', placeholder: 'Ex: 2 minutos' },
@@ -103,7 +92,6 @@ const limpezaVidros: CategorySpec = {
   ],
 }
 
-/* ── Categoria 5 — Limpeza Externa ── */
 const limpezaExterna: CategorySpec = {
   slug: 'limpeza-externa',
   hasSubtype: false,
@@ -127,7 +115,6 @@ const limpezaExterna: CategorySpec = {
   ],
 }
 
-/* ── Categoria 6 — Limpeza Interna ── */
 const limpezaInterna: CategorySpec = {
   slug: 'limpeza-interna',
   hasSubtype: false,
@@ -151,7 +138,6 @@ const limpezaInterna: CategorySpec = {
   ],
 }
 
-/* ── Categoria 7 — Pneus e Rodas ── */
 const pneusRodas: CategorySpec = {
   slug: 'pneus-e-rodas',
   hasSubtype: false,
@@ -178,49 +164,32 @@ const pneusRodas: CategorySpec = {
   ],
 }
 
-/* ── Categoria 8 — Polimento e Vitrificadores ── */
 const polimentoVitrificadores: CategorySpec = {
   slug: 'polimento-e-vitrificadores',
   hasSubtype: true,
   subtypeLabel: 'Tipo de produto',
   subtypeOptions: [
-    'Composto de corte',
-    'Composto de refino',
-    'Composto de lustro',
-    'Polidor de acabamento',
-    'Polidor one step',
-    'Removedor de marcas d\'água por polimento',
-    'Polidor de vidros',
-    'Polidor manual',
-    'Glaze',
-    'Outro produto de polimento',
-    'Vitrificador de pintura',
-    'Vitrificador de vidros',
-    'Vitrificador de rodas',
-    'Vitrificador de plásticos',
-    'Coating para pintura',
-    'Coating para vidros',
-    'Manutenção de coating',
-    'Outro produto de proteção',
+    'Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step',
+    'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento',
+    'Vitrificador de pintura', 'Vitrificador de vidros', 'Vitrificador de rodas', 'Vitrificador de plásticos',
+    'Coating para pintura', 'Coating para vidros', 'Manutenção de coating', 'Outro produto de proteção',
   ],
   fields: [
-    /* Campos de polimento */
-    { key: 'polish_surface', label: 'Superfície indicada', type: 'multiselect', options: ['Pintura', 'Verniz automotivo', 'Vidros', 'Faróis', 'Black piano', 'Metais', 'Outro'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'cut_level', label: 'Nível de corte (0-10)', type: 'text', placeholder: 'Ex: 7 ou Não informado', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'finish_level', label: 'Nível de acabamento (0-10)', type: 'text', placeholder: 'Ex: 8 ou Não informado', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'polish_step', label: 'Etapa do polimento', type: 'select', options: ['Corte', 'Refino', 'Lustro', 'One step', 'Acabamento', 'Polimento manual', 'Outro'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'abrasive_tech', label: 'Tecnologia dos abrasivos', type: 'select', options: ['Abrasivos de quebra', 'Abrasivos não decrescentes', 'Tecnologia híbrida', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'machine_compat', label: 'Tipo de máquina compatível', type: 'multiselect', options: ['Politriz rotativa', 'Politriz roto-orbital', 'Politriz de movimento forçado', 'Aplicação manual', 'Outro'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'pad_recommended', label: 'Boina recomendada', type: 'multiselect', options: ['Lã', 'Microfibra', 'Espuma agressiva', 'Espuma média', 'Espuma macia', 'Boina específica do fabricante', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'dust_level', label: 'Nível de geração de pó', type: 'select', options: ['Baixo', 'Moderado', 'Alto', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'work_time', label: 'Tempo de trabalho', type: 'text', placeholder: 'Ex: 2 minutos por painel', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'has_fillers', label: 'Possui mascaradores ou fillers', type: 'select', options: ['Sim', 'Não', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'has_silicone', label: 'Possui silicone', type: 'select', options: ['Sim', 'Não', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'repaint_safe', label: 'Indicado para uso em repintagem', type: 'select', options: ['Sim', 'Não', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'polish_usage', label: 'Modo de uso', type: 'longtext', placeholder: 'Quantidade, velocidade da máquina, pressão, número de passadas, remoção do resíduo...', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'polish_precautions', label: 'Cuidados de utilização', type: 'longtext', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    { key: 'polish_notes', label: 'Observações adicionais', type: 'longtext', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
-    /* Campos de vitrificação */
+    { key: 'polish_surface', label: 'Superfície indicada', type: 'multiselect', options: ['Pintura', 'Verniz automotivo', 'Vidros', 'Faróis', 'Black piano', 'Metais', 'Outro'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'cut_level', label: 'Nível de corte (0-10)', type: 'text', placeholder: 'Ex: 7 ou Não informado', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'finish_level', label: 'Nível de acabamento (0-10)', type: 'text', placeholder: 'Ex: 8 ou Não informado', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'polish_step', label: 'Etapa do polimento', type: 'select', options: ['Corte', 'Refino', 'Lustro', 'One step', 'Acabamento', 'Polimento manual', 'Outro'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'abrasive_tech', label: 'Tecnologia dos abrasivos', type: 'select', options: ['Abrasivos de quebra', 'Abrasivos não decrescentes', 'Tecnologia híbrida', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'machine_compat', label: 'Tipo de máquina compatível', type: 'multiselect', options: ['Politriz rotativa', 'Politriz roto-orbital', 'Politriz de movimento forçado', 'Aplicação manual', 'Outro'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'pad_recommended', label: 'Boina recomendada', type: 'multiselect', options: ['Lã', 'Microfibra', 'Espuma agressiva', 'Espuma média', 'Espuma macia', 'Boina específica do fabricante', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'dust_level', label: 'Nível de geração de pó', type: 'select', options: ['Baixo', 'Moderado', 'Alto', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'work_time', label: 'Tempo de trabalho', type: 'text', placeholder: 'Ex: 2 minutos por painel', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'has_fillers', label: 'Possui mascaradores ou fillers', type: 'select', options: ['Sim', 'Não', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'has_silicone', label: 'Possui silicone', type: 'select', options: ['Sim', 'Não', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'repaint_safe', label: 'Indicado para uso em repintagem', type: 'select', options: ['Sim', 'Não', 'Não informado'], showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'polish_usage', label: 'Modo de uso', type: 'longtext', placeholder: 'Quantidade, velocidade da máquina, pressão, número de passadas, remoção do resíduo...', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'polish_precautions', label: 'Cuidados de utilização', type: 'longtext', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
+    { key: 'polish_notes', label: 'Observações adicionais', type: 'longtext', showOnSubtypes: ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento'] },
     { key: 'coat_surface', label: 'Superfície indicada', type: 'multiselect', options: ['Pintura', 'Vidros', 'Rodas', 'Plásticos', 'Faróis', 'Metais', 'Outro'], showOnSubtypes: ['Vitrificador de pintura', 'Vitrificador de vidros', 'Vitrificador de rodas', 'Vitrificador de plásticos', 'Coating para pintura', 'Coating para vidros', 'Manutenção de coating', 'Outro produto de proteção'] },
     { key: 'coat_technology', label: 'Tecnologia ou composição declarada', type: 'select', options: ['SiO₂', 'Polissilazano', 'Grafeno', 'Cerâmica', 'Polímeros', 'Não informado'], showOnSubtypes: ['Vitrificador de pintura', 'Vitrificador de vidros', 'Vitrificador de rodas', 'Vitrificador de plásticos', 'Coating para pintura', 'Coating para vidros', 'Manutenção de coating', 'Outro produto de proteção'] },
     { key: 'coat_durability', label: 'Durabilidade estimada', type: 'text', placeholder: 'Ex: 1 ano', help: 'A durabilidade depende da preparação, aplicação, manutenção e condições de uso.', showOnSubtypes: ['Vitrificador de pintura', 'Vitrificador de vidros', 'Vitrificador de rodas', 'Vitrificador de plásticos', 'Coating para pintura', 'Coating para vidros', 'Manutenção de coating', 'Outro produto de proteção'] },
@@ -288,16 +257,14 @@ export function getSubtypeOptions(slug: string): string[] {
   return spec?.subtypeOptions ?? []
 }
 
-/** Determine the subtype group for polimento e vitrificadores */
 export function getSubtypeGroup(subtype: string): 'polimento' | 'vitrificacao' | null {
-  const polimentoTypes = ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas d\'água por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento']
+  const polimentoTypes = ['Composto de corte', 'Composto de refino', 'Composto de lustro', 'Polidor de acabamento', 'Polidor one step', 'Removedor de marcas dágua por polimento', 'Polidor de vidros', 'Polidor manual', 'Glaze', 'Outro produto de polimento']
   const vitrificacaoTypes = ['Vitrificador de pintura', 'Vitrificador de vidros', 'Vitrificador de rodas', 'Vitrificador de plásticos', 'Coating para pintura', 'Coating para vidros', 'Manutenção de coating', 'Outro produto de proteção']
   if (polimentoTypes.includes(subtype)) return 'polimento'
   if (vitrificacaoTypes.includes(subtype)) return 'vitrificacao'
   return null
 }
 
-/** Get fields filtered by both category slug and subtype (and product_type for categories without subtype) */
 export function getFieldsForCategoryAndSubtype(slug: string, subtype?: string, productType?: string): SpecField[] {
   const spec = categorySpecs[slug]
   if (!spec) return []

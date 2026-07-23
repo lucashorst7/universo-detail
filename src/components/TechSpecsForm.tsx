@@ -61,44 +61,28 @@ export function TechSpecsForm({ fields, values, onChange, subtype, hasSubtype, s
 
   return (
     <div className="techspecs-form">
-      {/* Volumetries - common to all products */}
       <div className="techspecs-section">
         <h4 className="techspecs-section-title">Volumetrias / Apresentações</h4>
         <div className="techspecs-volumetry-presets">
           {PRESET_VOLUMETRIES.map(v => (
-            <button
-              key={v}
-              type="button"
-              className="techspecs-chip-btn"
-              onClick={() => addVolumetry(v)}
-            >
+            <button key={v} type="button" className="techspecs-chip-btn" onClick={() => addVolumetry(v)}>
               <Plus size={12} /> {v}
             </button>
           ))}
         </div>
         <div className="techspecs-volumetry-custom">
-          <input
-            type="text"
-            value={customVolumetry}
-            onChange={(e) => setCustomVolumetry(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addVolumetry(customVolumetry) } }}
-            placeholder="Outra apresentação..."
-          />
+          <input type="text" value={customVolumetry} onChange={(e) => setCustomVolumetry(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addVolumetry(customVolumetry) } }} placeholder="Outra apresentação..." />
           <button type="button" className="btn btn-outline btn-sm" onClick={() => addVolumetry(customVolumetry)}>Adicionar</button>
         </div>
         {((values['volumetries'] as string[]) ?? []).length > 0 && (
           <div className="techspecs-chip-list">
             {(values['volumetries'] as string[]).map(v => (
-              <span key={v} className="techspecs-chip">
-                {v}
-                <button type="button" onClick={() => removeVolumetry(v)}><X size={12} /></button>
-              </span>
+              <span key={v} className="techspecs-chip">{v}<button type="button" onClick={() => removeVolumetry(v)}><X size={12} /></button></span>
             ))}
           </div>
         )}
       </div>
 
-      {/* Subtype selector */}
       {hasSubtype && subtypeOptions && subtypeOptions.length > 0 && (
         <div className="techspecs-section">
           <div className="form-group">
@@ -111,7 +95,6 @@ export function TechSpecsForm({ fields, values, onChange, subtype, hasSubtype, s
         </div>
       )}
 
-      {/* Conditional fields */}
       {fields.length > 0 && (
         <div className="techspecs-section">
           <h4 className="techspecs-section-title">Ficha Técnica</h4>
@@ -121,30 +104,9 @@ export function TechSpecsForm({ fields, values, onChange, subtype, hasSubtype, s
               return (
                 <div key={field.key} className="form-group">
                   <label>{field.label}</label>
-                  {field.type === 'text' && (
-                    <input
-                      type="text"
-                      value={(val as string) ?? ''}
-                      onChange={(e) => onChange(field.key, e.target.value)}
-                      placeholder={field.placeholder ?? ''}
-                    />
-                  )}
-                  {field.type === 'longtext' && (
-                    <textarea
-                      value={(val as string) ?? ''}
-                      onChange={(e) => onChange(field.key, e.target.value)}
-                      placeholder={field.placeholder ?? ''}
-                      rows={3}
-                    />
-                  )}
-                  {field.type === 'number' && (
-                    <input
-                      type="text"
-                      value={(val as string) ?? ''}
-                      onChange={(e) => onChange(field.key, e.target.value)}
-                      placeholder={field.placeholder ?? ''}
-                    />
-                  )}
+                  {field.type === 'text' && <input type="text" value={(val as string) ?? ''} onChange={(e) => onChange(field.key, e.target.value)} placeholder={field.placeholder ?? ''} />}
+                  {field.type === 'longtext' && <textarea value={(val as string) ?? ''} onChange={(e) => onChange(field.key, e.target.value)} placeholder={field.placeholder ?? ''} rows={3} />}
+                  {field.type === 'number' && <input type="text" value={(val as string) ?? ''} onChange={(e) => onChange(field.key, e.target.value)} placeholder={field.placeholder ?? ''} />}
                   {field.type === 'select' && field.options && (
                     <select value={(val as string) ?? ''} onChange={(e) => onChange(field.key, e.target.value)}>
                       <option value="">Não informado</option>
@@ -162,16 +124,7 @@ export function TechSpecsForm({ fields, values, onChange, subtype, hasSubtype, s
                     <div className="techspecs-multiselect">
                       {field.options.map(opt => {
                         const selected = ((val as string[]) ?? []).includes(opt)
-                        return (
-                          <button
-                            key={opt}
-                            type="button"
-                            className={`techspecs-chip-btn ${selected ? 'selected' : ''}`}
-                            onClick={() => toggleMulti(field.key, opt)}
-                          >
-                            {opt}
-                          </button>
-                        )
+                        return <button key={opt} type="button" className={`techspecs-chip-btn ${selected ? 'selected' : ''}`} onClick={() => toggleMulti(field.key, opt)}>{opt}</button>
                       })}
                     </div>
                   )}
@@ -179,26 +132,12 @@ export function TechSpecsForm({ fields, values, onChange, subtype, hasSubtype, s
                     <div className="techspecs-dilution">
                       {((val as { situation: string; ratio: string }[]) ?? []).map((row, idx) => (
                         <div key={idx} className="techspecs-dilution-row">
-                          <input
-                            type="text"
-                            value={row.situation}
-                            onChange={(e) => updateDilutionRow(field.key, idx, 'situation', e.target.value)}
-                            placeholder="Situação (ex: Sujeira leve)"
-                          />
-                          <input
-                            type="text"
-                            value={row.ratio}
-                            onChange={(e) => updateDilutionRow(field.key, idx, 'ratio', e.target.value)}
-                            placeholder="Proporção (ex: 1:100)"
-                          />
-                          <button type="button" className="techspecs-dilution-remove" onClick={() => removeDilutionRow(field.key, idx)}>
-                            <X size={14} />
-                          </button>
+                          <input type="text" value={row.situation} onChange={(e) => updateDilutionRow(field.key, idx, 'situation', e.target.value)} placeholder="Situação (ex: Sujeira leve)" />
+                          <input type="text" value={row.ratio} onChange={(e) => updateDilutionRow(field.key, idx, 'ratio', e.target.value)} placeholder="Proporção (ex: 1:100)" />
+                          <button type="button" className="techspecs-dilution-remove" onClick={() => removeDilutionRow(field.key, idx)}><X size={14} /></button>
                         </div>
                       ))}
-                      <button type="button" className="btn btn-outline btn-sm" onClick={() => addDilutionRow(field.key)}>
-                        <Plus size={14} /> Adicionar diluição
-                      </button>
+                      <button type="button" className="btn btn-outline btn-sm" onClick={() => addDilutionRow(field.key)}><Plus size={14} /> Adicionar diluição</button>
                     </div>
                   )}
                   {field.help && <span className="techspecs-help">{field.help}</span>}

@@ -22,10 +22,8 @@
 .review-card h4 { font-size: 15px; margin-bottom: 4px; }
 .review-card p { font-size: 14px; color: var(--color-text-2); line-height: 1.6; }
 @media (max-width: 700px) { .product-detail-grid { grid-template-columns: 1fr; } }
-
 .review-gate { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 16px; }
 .review-gate p { font-size: 14px; color: var(--color-text-2); text-align: center; }
-
 .review-form { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
 .review-form-rating { display: flex; align-items: center; gap: 6px; }
 .review-star-btn { background: none; border: none; padding: 0; cursor: pointer; display: flex; }
