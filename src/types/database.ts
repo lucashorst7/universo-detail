@@ -20,6 +20,8 @@ export interface Brand {
   created_at: string
 }
 
+export type ProductStatus = 'draft' | 'review' | 'published' | 'archived'
+
 export interface Product {
   id: string
   name: string
@@ -29,6 +31,8 @@ export interface Product {
   short_description: string | null
   description: string | null
   specifications: Record<string, unknown>[] | null
+  technical_specs: Record<string, unknown> | null
+  volumetries: string[] | null
   usability: string | null
   tips: string | null
   image_url: string | null
@@ -39,7 +43,7 @@ export interface Product {
   is_new: boolean | null
   tags: string[] | null
   created_at: string | null
-  status: 'draft' | 'published'
+  status: ProductStatus
   publish_at: string | null
   published_at: string | null
   parent_product_id: string | null

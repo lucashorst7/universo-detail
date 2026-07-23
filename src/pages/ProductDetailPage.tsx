@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom'
 import { fetchProductBySlug, fetchReviewsByProduct } from '../lib/queries'
 import { Spinner, ErrorState, EmptyState } from '../components/Feedback'
 import { Rating } from '../components/Badge'
+import { TechSpecsDisplay } from '../components/TechSpecsDisplay'
+import { getCategorySpec, getFieldsForCategoryAndSubtype } from '../lib/categorySpecs'
 import { useAuth } from '../lib/auth'
 import { supabase } from '../lib/supabase'
 import type { ProductWithRelations, CustomerReview } from '../types/database'
@@ -35,6 +37,13 @@ export function ProductDetailPage() {
 
   const avg = reviews.length ? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length : 0
 
+  const categorySlug = product.category?.slug ?? ''
+  const categorySpec = categorySlug ? getCategorySpec(categorySlug) : null
+  const techSpecs = (product.technical_specs as Record<string, unknown>) ?? {}
+  const subtype = (techSpecs.product_subtype as string) ?? undefined
+  const productType = (techSpecs.product_type as string) ?? undefined
+  const visibleFields = categorySpec ? getFieldsForCategoryAndSubtype(categorySlug, subtype, productType) : []
+
   return (
     <div className="container product-detail">
       <nav className="breadcrumb">
@@ -65,6 +74,16 @@ export function ProductDetailPage() {
           {product.description && <p className="product-detail-desc">{product.description}</p>}
         </div>
       </div>
+
+      {categorySpec && (
+        <TechSpecsDisplay
+          fields={visibleFields}
+          specs={techSpecs}
+          volumetries={product.volumetries}
+          subtypeLabel={categorySpec.subtypeLabel}
+          subtype={subtype}
+        />
+      )}
 
       <section className="product-reviews">
         <h2>Avaliações ({reviews.length})</h2>
@@ -182,4 +201,3 @@ function ReviewForm({ productId, loggedIn, emailVerified, displayName, onSubmitt
     </form>
   )
 }
-

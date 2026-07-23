@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import './adminui.css'
 
-export function Modal({ open, onClose, title, children }: { open: boolean; onClose: () => void; title: string; children: React.ReactNode }) {
+export function Modal({ open, onClose, title, children, wide }: { open: boolean; onClose: () => void; title: string; children: React.ReactNode; wide?: boolean }) {
   useEffect(() => {
     if (!open) return
     function esc(e: KeyboardEvent) { if (e.key === 'Escape') onClose() }
@@ -19,7 +19,7 @@ export function Modal({ open, onClose, title, children }: { open: boolean; onClo
 
   return createPortal(
     <div className="modal-overlay" onMouseDown={onClose}>
-      <div className="modal-content" onMouseDown={(e) => e.stopPropagation()}>
+      <div className={`modal-content ${wide ? 'modal-wide' : ''}`} onMouseDown={(e) => e.stopPropagation()}>
         <div className="modal-head">
           <h3>{title}</h3>
           <button className="modal-close" onClick={onClose}><X size={18} /></button>

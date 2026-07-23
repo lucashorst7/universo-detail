@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { Plus, Edit2, Trash2 } from 'lucide-react'
 import { supabase, isConfigured } from '../../lib/supabase'
 import { Spinner, EmptyState } from '../../components/Feedback'
 import { Modal, ConfirmDialog, Toast } from '../../components/AdminUI'
+import { TechSpecsForm } from '../../components/TechSpecsForm'
+import { getCategorySpec, getFieldsForCategoryAndSubtype } from '../../lib/categorySpecs'
 import type { Product, Brand, Category } from '../../types/database'
 
 export function AdminProductsPage() {
@@ -15,6 +17,9 @@ export function AdminProductsPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null)
   const [form, setForm] = useState({ name: '', slug: '', description: '', brand_id: '', category_id: '', status: 'draft', image_url: '' })
+  const [techSpecs, setTechSpecs] = useState<Record<string, unknown>>({})
+  const [volumetries, setVolumetries] = useState<string[]>([])
+  const [subtype, setSubtype] = useState('')
 
   async function load() {
     if (!isConfigured) { setLoading(false); return }
@@ -34,17 +39,75 @@ export function AdminProductsPage() {
   function openCreate() {
     setEditing(null)
     setForm({ name: '', slug: '', description: '', brand_id: '', category_id: '', status: 'draft', image_url: '' })
+    setTechSpecs({})
+    setVolumetries([])
+    setSubtype('')
     setModalOpen(true)
   }
 
   function openEdit(p: Product) {
     setEditing(p)
     setForm({ name: p.name, slug: p.slug, description: p.description ?? '', brand_id: p.brand_id ?? '', category_id: p.category_id ?? '', status: p.status, image_url: p.image_url ?? '' })
+    setTechSpecs((p.technical_specs as Record<string, unknown>) ?? {})
+    setVolumetries(p.volumetries ?? [])
+    setSubtype((p.technical_specs as Record<string, unknown>)?.product_subtype as string ?? '')
     setModalOpen(true)
+  }
+
+  const selectedCategorySlug = useMemo(() => {
+    return categories.find(c => c.id === form.category_id)?.slug ?? ''
+  }, [categories, form.category_id])
+
+  const categorySpec = useMemo(() => {
+    return selectedCategorySlug ? getCategorySpec(selectedCategorySlug) : null
+  }, [selectedCategorySlug])
+
+  const productType = (techSpecs.product_type as string) ?? undefined
+
+  const visibleFields = useMemo(() => {
+    if (!categorySpec) return []
+    return getFieldsForCategoryAndSubtype(selectedCategorySlug, subtype, productType)
+  }, [categorySpec, selectedCategorySlug, subtype, productType])
+
+  function handleTechSpecChange(key: string, value: unknown) {
+    if (key === 'volumetries') {
+      setVolumetries(value as string[])
+      return
+    }
+    setTechSpecs(prev => {
+      const updated = { ...prev }
+      if (value === '' || value === null || (Array.isArray(value) && value.length === 0)) {
+        delete updated[key]
+      } else {
+        updated[key] = value
+      }
+      return updated
+    })
+  }
+
+  function handleSubtypeChange(newSubtype: string) {
+    setSubtype(newSubtype)
+    setTechSpecs(prev => ({ ...prev, product_subtype: newSubtype }))
+  }
+
+  function handleCategoryChange(catId: string) {
+    setForm(f => ({ ...f, category_id: catId }))
+    setSubtype('')
+    const slug = categories.find(c => c.id === catId)?.slug ?? ''
+    const spec = getCategorySpec(slug)
+    const cleanedTechSpecs: Record<string, unknown> = {}
+    if (spec?.hasSubtype && subtype) {
+      cleanedTechSpecs.product_subtype = subtype
+    }
+    setTechSpecs(cleanedTechSpecs)
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    const finalTechSpecs: Record<string, unknown> = { ...techSpecs }
+    if (categorySpec?.hasSubtype && subtype) {
+      finalTechSpecs.product_subtype = subtype
+    }
     const payload = {
       name: form.name,
       slug: form.slug || form.name.toLowerCase().replace(/\s+/g, '-'),
@@ -53,6 +116,8 @@ export function AdminProductsPage() {
       category_id: form.category_id || null,
       status: form.status as 'draft' | 'published',
       image_url: form.image_url || null,
+      technical_specs: finalTechSpecs,
+      volumetries: volumetries.length > 0 ? volumetries : null,
     }
     if (editing) {
       const { error } = await supabase.from('products').update(payload).eq('id', editing.id)
@@ -109,7 +174,7 @@ export function AdminProductsPage() {
         </table>
       )}
 
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? 'Editar produto' : 'Novo produto'}>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? 'Editar produto' : 'Novo produto'} wide>
         <form className="admin-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Nome</label>
@@ -132,11 +197,25 @@ export function AdminProductsPage() {
           </div>
           <div className="form-group">
             <label>Categoria</label>
-            <select value={form.category_id} onChange={(e) => setForm({ ...form, category_id: e.target.value })}>
+            <select value={form.category_id} onChange={(e) => handleCategoryChange(e.target.value)}>
               <option value="">Selecione...</option>
               {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </div>
+
+          {form.category_id && categorySpec && (
+            <TechSpecsForm
+              fields={visibleFields}
+              values={{ ...techSpecs, volumetries }}
+              onChange={handleTechSpecChange}
+              subtype={subtype}
+              hasSubtype={categorySpec.hasSubtype}
+              subtypeLabel={categorySpec.subtypeLabel}
+              subtypeOptions={categorySpec.subtypeOptions}
+              onSubtypeChange={handleSubtypeChange}
+            />
+          )}
+
           <div className="form-group">
             <label>Status</label>
             <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>

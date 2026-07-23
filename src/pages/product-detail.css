@@ -13,6 +13,7 @@
 .product-detail-brand:hover { color: var(--color-primary); }
 .product-detail-short { font-size: 16px; color: var(--color-text); font-weight: 500; }
 .product-detail-desc { font-size: 15px; color: var(--color-text-2); line-height: 1.7; margin-top: 8px; }
+.product-techspecs { margin-bottom: 48px; }
 .product-reviews h2 { font-size: 20px; margin-bottom: 16px; }
 .reviews-list { display: flex; flex-direction: column; gap: 12px; }
 .review-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 16px; }
