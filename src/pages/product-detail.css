@@ -31,3 +31,6 @@
 .review-form-input:focus { border-color: var(--color-primary); }
 .review-form-input::placeholder { color: var(--color-text-3); }
 textarea.review-form-input { resize: vertical; }
+.product-detail-edit-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 13px; font-weight: 600; color: var(--color-text-2); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); text-decoration: none; transition: all 0.15s; width: fit-content; }
+.product-detail-edit-btn:hover { color: var(--color-primary); border-color: var(--color-primary); }
+.product-detail-edit-btn:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
