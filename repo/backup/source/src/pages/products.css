@@ -1,0 +1,4 @@
+.products-page { padding: 40px 24px; }
+.products-head { margin-bottom: 24px; }
+.products-head h1 { font-size: 28px; font-weight: 700; }
+.products-head p { font-size: 14px; color: var(--color-text-2); margin-top: 4px; }

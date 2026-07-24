@@ -1,0 +1,320 @@
+[
+  {
+    "id": "001f1af8-f6d2-432f-bf7f-ca3c7ff54caa",
+    "name": "Acidus Fast Limpador de Uso Geral Uso Externo Vonixx 500ml",
+    "slug": "acidus-fast-limpador-de-uso-geral-uso-externo-vonixx-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/acidus_fast_limpador_de_uso_geral_uso_externo_vo_1_20251015005351_7ceb989344b8.jpg"
+  },
+  {
+    "id": "22dd7dce-9e50-4e4d-aa14-7ca7ca932ee1",
+    "name": "Acidus Pro Limpador de Uso Geral Uso Externo Vonixx 1 5 L",
+    "slug": "acidus-pro-limpador-de-uso-geral-uso-externo-vonixx-1-5-l",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/acidus_pro_limpador_de_uso_geral_uso_externo_von_1_20251015010946_466dabba2fcd.jpg"
+  },
+  {
+    "id": "b4084fac-7986-499e-b0b9-73dce238778e",
+    "name": "Aquo Guard Shampoo Automotivo Desengraxante Alcance 500ml Diluicao ate 1400",
+    "slug": "aquo-guard-shampoo-automotivo-desengraxante-alcance-500ml-diluicao-ate-1400",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/aquo_guard_shampoo_automotivo_desengraxante_alca_1_20260528160144_37164ab2146c.jpg"
+  },
+  {
+    "id": "dba386f5-21f6-4116-be19-84a698734686",
+    "name": "Areon Fresco X Version Black Crystal",
+    "slug": "areon-fresco-x-version-black-crystal",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/areon_smile_black_crystal_chamego_1_20251020204538_bc2b2fb24f3e.jpg"
+  },
+  {
+    "id": "c59c4e36-e64d-471b-bbad-0b2ce7d84b62",
+    "name": "Areon Fresh Wave New Car",
+    "slug": "areon-fresh-wave-new-car",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/areon_fresh_wave_new_car_1_20260311143813_5c9842245981.jpg"
+  },
+  {
+    "id": "7d7b7d52-2c04-4eeb-b463-51fefa0ed4ba",
+    "name": "Areon Mon Aromatizante New Car",
+    "slug": "areon-mon-new-car",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/areon_fresh_wave_new_car_1_20260311143813_5c9842245981.jpg"
+  },
+  {
+    "id": "d1a774cd-fbe9-4e49-9733-1df7ede9efe5",
+    "name": "Areon Perfume Blister New Car 35ml",
+    "slug": "areon-perfume-blister-new-car-35ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/areon_perfume_blister_new_car_35ml_1_20260521115138_2706bef2e6ba.jpg"
+  },
+  {
+    "id": "6caa00bf-9fa7-4113-9462-f8b6774b3d3b",
+    "name": "Areon Smile Black Crystal Chamego",
+    "slug": "areon-smile-black-crystal-chamego",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/areon_smile_black_crystal_chamego_1_20251020204538_bc2b2fb24f3e.jpg"
+  },
+  {
+    "id": "67382f18-6294-49c9-9974-3de82a691130",
+    "name": "Aroma Para Carro Apple Cinnamon Areon",
+    "slug": "aroma-para-carro-apple-amp-cinnamon",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/aroma_para_carro_apple_amp_cinnamon_1_20260206220320_b439b8004d8f.jpg"
+  },
+  {
+    "id": "534aa53b-f71a-4f17-8621-592b8355938e",
+    "name": "Aroma para Carro Cold Black Vonixx",
+    "slug": "aroma-para-carro-cold-black-vonixx",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/aroma_para_carro_cold_black_vonixx_1_20260201194754_c7906bccc7a9.jpg"
+  },
+  {
+    "id": "351d9087-0bcf-4006-9cea-e4f851bad03b",
+    "name": "Aroma para Carro Fine Leather Vonixx",
+    "slug": "aroma-para-carro-fine-leather-vonixx",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/aroma_para_carro_fine_leather_vonixx_1_20260201194517_c9bbf4069a46.jpg"
+  },
+  {
+    "id": "793f2a4d-8558-4bf8-9057-e9bc4af0c6dd",
+    "name": "Aroma para Carro Hot Coffee Vonixx",
+    "slug": "aroma-para-carro-hot-coffee-vonixx",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/aroma_para_carro_hot_coffee_vonixx_1_20260201194100_d95226ad2e6c.jpg"
+  },
+  {
+    "id": "ac5575f5-fc33-4d31-bd5e-5007a0f408a3",
+    "name": "Aroma para Carro New Car Vonixx",
+    "slug": "aroma-para-carro-new-car-vonixx",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/aroma_para_carro_new_car_vonixx_1_20260201195020_8e1ab9e778ed.jpg"
+  },
+  {
+    "id": "3471e5f6-5643-446f-b5d3-ab66207d2dbe",
+    "name": "Aromatizante Air Freshner Niponitos Samurai Soft 99",
+    "slug": "aromatizante-air-freshner-niponitos-samurai-soft-99",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/aromatizante_air_freshner_niponitos_samurai_soft_9_1_20251118141858_e002fd8d6da0.jpg"
+  },
+  {
+    "id": "ac80fe28-423e-497a-8121-afe2d5af4dae",
+    "name": "Cherry Wax Cera 4 em 1 Zacs 200ml",
+    "slug": "cherry-wax-cera-4-em-1-zacs-200ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/cherry_wax_cera_4_em_1_zacs_200ml_1_20260411130528_b30626a5d835.jpg"
+  },
+  {
+    "id": "55da8e01-ea70-4909-9204-9e71fd7eea70",
+    "name": "Cherry Wax Cera 4 em 1 Zacs 500ml",
+    "slug": "cherry-wax-cera-4-em-1-zacs-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/cherry_wax_cera_4_em_1_zacs_500ml_1_20250830171020_416625f42570.jpg"
+  },
+  {
+    "id": "82bfbdeb-a6ad-4560-a41b-e53b2ef3f6fa",
+    "name": "Descole Removedor de Cola e Piche Cadillac 1 5 L",
+    "slug": "descole-removedor-de-cola-e-piche-cadillac-1-5-l",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/descole_removedor_de_cola_e_piche_cadillac_15_l_1_20260311151556_23acef455416.jpg"
+  },
+  {
+    "id": "03f7aaa5-c9ca-4514-8ca1-823144b3cad8",
+    "name": "Descole Removedor de Cola e Piche Cadillac 500ml",
+    "slug": "descole-removedor-de-cola-e-piche-cadillac-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/descole_removedor_de_cola_e_piche_cadillac_500ml_1_20250908153404_8a14b1bee710.jpg"
+  },
+  {
+    "id": "20c29ace-e64b-441a-93b2-7921bef5795a",
+    "name": "Ecoblack Finalizador para Caixas de Rodas Vintex 1,5L",
+    "slug": "ecoblack-vintex-15l",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/ecoblack_finalizador_para_caixas_de_rodas_vint_1_20251009235941_9766e586fdd9.jpg"
+  },
+  {
+    "id": "ccdfbe5e-1ea2-46a7-a1df-80ee96a49b79",
+    "name": "Extreme Tire Gel Autoamerica 473ml",
+    "slug": "extreme-tire-gel-autoamerica-473ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/extreme_tire_gel_gel_para_pneus_autoamerica_50_1_20251103225207_08fe942b6a87.jpg"
+  },
+  {
+    "id": "1d7182dd-e7d3-43f0-ae76-ab0cb71c5f93",
+    "name": "Finisherfresh Summer Odorizador para Tecidos Spartan 5 Litros Diluicao ate 1 10",
+    "slug": "finisherfresh-summer-odorizador-para-tecidos-spartan-5-litros-diluicao-ate-110",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/finisherfresh_summer_odorizador_para_tecidos_spart_1_20251103152859_0e8df761eb7a.jpg"
+  },
+  {
+    "id": "b782bb9d-89e7-4644-baa7-02aecb9fb771",
+    "name": "Foam Gloss Lava Auto Magil Clean 1 Litro Diluicao ate 1200",
+    "slug": "foam-gloss-lava-auto-magil-clean-1-litro-diluicao-ate-1200",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/foam_gloss_lava_auto_magil_clean_1_litro_diluio_at_1_20251126164144_da8166ff5cff.jpg"
+  },
+  {
+    "id": "9eafd76f-0a3d-4c70-8e0e-6b6587306568",
+    "name": "Foam Gloss Lava Auto Magil Clean 3 Litros Diluicao ate 1200",
+    "slug": "foam-gloss-lava-auto-magil-clean-3-litros-diluicao-ate-1200",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/foam_gloss_lava_auto_magil_clean_3_litros_diluio_a_1_20251125170213_63827ac4eb14.jpg"
+  },
+  {
+    "id": "e4165102-b059-4dfc-b728-251b0402b9c9",
+    "name": "Glaco Big Roll On Repelente de \u00c1gua Soft99 120ml",
+    "slug": "glaco-big-roll-on-soft99-120ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/glaco_big_roll_on_cristalizador_de_vidros_e_repele_1_20260205163952_dc52fcf7e1b7.jpg"
+  },
+  {
+    "id": "ec038c72-1ccb-4bf2-8c32-fbfd6d3c410e",
+    "name": "Glaco Washer Soft99 200ml",
+    "slug": "glaco-washer-soft99-200ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/glaco_washer_aditivo_limpante_repelente_de_gua_de_1_20260205163324_7f1494d9dc56.jpg"
+  },
+  {
+    "id": "0ac33b65-fb7d-4c82-a550-b9c1193990e8",
+    "name": "Glazy Anti Fog Limpa Vidros com Acao Antiembacante Vonixx 500ml",
+    "slug": "glazy-anti-fog-limpa-vidros-com-acao-antiembacante-vonixx-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/glazy_anti_fog_limpa_vidros_com_ao_antiembaante_vo_1_20260223195607_8e19e3d6becb.jpg"
+  },
+  {
+    "id": "29c9c6b2-e6e1-4b03-873c-212b9b6bd362",
+    "name": "Hydrox Wash Lava Auto Ceramico 2 em 1 Vonixx 240ml Diluicao ate 1100",
+    "slug": "hydrox-wash-lava-auto-ceramico-2-em-1-vonixx-240ml-diluicao-ate-1100",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/hydrox_wash_lava_auto_cermico_2_em_1_vonixx_240m_1_20250815111653_2c5c97750a7c.jpg"
+  },
+  {
+    "id": "63196c18-5b3f-4fdb-a045-343b597dc3e5",
+    "name": "Lava Auto Neutro Cremoso Magil Clean 5 Litros Diluicao ate 150",
+    "slug": "lava-auto-neutro-cremoso-magil-clean-5-litros-diluicao-ate-150",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/lava_auto_neutro_cremoso_magil_clean_5_litros_dilu_1_20251103195558_30d84ce60666.jpg"
+  },
+  {
+    "id": "bb48b6a8-41b6-4259-94bc-0357cb0e8147",
+    "name": "Lava Auto Ultra Concentrado Snow Wash Protelim Diluicao ate 1400",
+    "slug": "lava-auto-ultra-concentrado-snow-wash-protelim-diluicao-ate-1400",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/lava_auto_ultra_concentrado_snow_wash_protelim_dil_1_20260524212454_38515b917bfb.jpg"
+  },
+  {
+    "id": "49302d06-cb5c-4ba2-8593-1a83ce84856b",
+    "name": "Lava Autos Shampoo Automotivo Vintex 500ml",
+    "slug": "lava-autos-vintex-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/lava_autos_shampoo_automotivo_vintex_500ml_dil_1_20260225232322_a6a4542f3186.jpg"
+  },
+  {
+    "id": "1d16b4ed-fd52-42b9-8056-192dc4e26440",
+    "name": "Limpa Vidros Antiembacante Easytech 500ml",
+    "slug": "limpa-vidros-antiembacante-easytech-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/limpa_vidros_antiembaante_easytech_500ml_1_20260608231625_8945cf2f1d48.jpg"
+  },
+  {
+    "id": "19e7c520-1a9e-41ab-b98d-56ff65600e42",
+    "name": "LL1 APC Limpador Multiuso Concentrado Lincoln 1L",
+    "slug": "ll1-apc-limpador-multiuso-lincoln-1l",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/ll1_apc_limpador_multiuso_concentrado_lincoln_2_20251103231317_0f719fd13fb5.jpg"
+  },
+  {
+    "id": "b32b64dd-a9ee-4108-90e4-4455c6d3b382",
+    "name": "Magnus Removedor de Cola de Adesivos Graxa e Piche Evox 500ml",
+    "slug": "magnus-removedor-de-cola-de-adesivos-graxa-e-piche-evox-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/magnus_removedor_de_cola_de_adesivos_graxa_e_piche_1_20260326110940_3a66652d328b.jpg"
+  },
+  {
+    "id": "9ea13ec1-0b10-48b0-b337-113df7c00be6",
+    "name": "Melon Shampoo Automotivo Neutro Super Concentrado Easytech 150ml Diluicao 1400",
+    "slug": "melon-shampoo-automotivo-neutro-super-concentrado-easytech-150ml-diluicao-1400",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/melon_shampoo_automotivo_neutro_super_concentrado_1_20250922202135_959668bd9fa6.jpg"
+  },
+  {
+    "id": "8c98c8a7-1635-40d8-aa67-ea39abb0e3a2",
+    "name": "MELON Shampoo Automotivo Super Concentrado EasyTech 5L",
+    "slug": "melon-shampoo-easytech-5l",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/melon_shampoo_automotivo_neutro_super_concentrado_1_20260610213915_50a258af2315.jpg"
+  },
+  {
+    "id": "0f44ea7e-6ce6-408f-acae-da3fcac2da75",
+    "name": "Native Cleaner Wax Brazilian Carnaba Vonixx 500ml",
+    "slug": "native-cleaner-wax-brazilian-carnauba-vonixx-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/native_cleaner_wax_brazilian_carnaba_vonixx_500m_1_20251008234311_8ea561d8bc5f.jpg"
+  },
+  {
+    "id": "2fc78507-9b22-4409-a2de-e4aa1c7f02fc",
+    "name": "Native Spray Wax Brazilian Carnaba Vonixx 500ml",
+    "slug": "native-spray-wax-brazilian-carnauba-vonixx-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/native_spray_wax_brazilian_carnaba_vonixx_500ml_1_20251008234348_b5e8f71b2bf9.jpg"
+  },
+  {
+    "id": "1dafab37-d5d0-473e-9360-aef051e35000",
+    "name": "Pluri Fast Limpador Pronto Uso Easytech 500ml",
+    "slug": "pluri-fast-limpador-pronto-uso-easytech-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/pluri_fast_limpador_pronto_uso_easytech_500ml_1_20260625154533_6a35425dc648.jpg"
+  },
+  {
+    "id": "e89d71ac-8453-48d5-96fe-89309d07d6c3",
+    "name": "Pneu Pretinho Vintex 500ml",
+    "slug": "pneu-pretinho-vintex-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/pneu_pretinho_vintex_500ml_1_20260301145927_33bc1d6c00f6.jpg"
+  },
+  {
+    "id": "156b21d9-f5e5-4b05-b55a-317a5553ea1b",
+    "name": "Pneu Visco Abrilhantador de Pneus Cadillac 5 Litros",
+    "slug": "pneu-visco-abrilhantador-de-pneus-cadillac-5-litros",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/pneu_visco_cadillac_5_litros_1_20251014144509_1c888e67a2f9.jpg"
+  },
+  {
+    "id": "be2904ae-52bf-47e0-936e-d3eaa537703b",
+    "name": "Prot Sh400 Detergente Automotivo Neutro Concentrado Protelim 5 Litros Diluicao ate 150",
+    "slug": "prot-sh400-detergente-automotivo-neutro-concentrado-protelim-5-litros-diluicao-ate-150",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/prot_sh400_detergente_automotivo_neutro_concentrad_1_20260706133933_fee6890994e4.jpg"
+  },
+  {
+    "id": "6d304abd-ab55-480f-aef7-2bb3b63fc99d",
+    "name": "Reflex Removedor de Manchas em Vidros com Acao Rapida e Ph Balanceado Easytech 500ml",
+    "slug": "reflex-removedor-de-manchas-em-vidros-com-acao-rapida-e-ph-balanceado-easytech-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/reflex_removedor_de_manchas_em_vidros_com_ao_rpida_1_20250923165453_fffec0cf9e82.jpg"
+  },
+  {
+    "id": "ab0bdb1f-be0c-450a-9310-8f385bd345af",
+    "name": "Resolvidro Gold em P Composto para Polimento de Vidros 100g",
+    "slug": "resolvidro-gold-em-po-composto-para-polimento-de-vidros-100g",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/resolvidro_gold_em_p_composto_para_polimento_de_vi_1_20260601162530_b10ff9366cb6.jpg"
+  },
+  {
+    "id": "f5a00b0f-0db7-4e56-97a8-20b79b487f16",
+    "name": "Sani Prime Finalizador Dub Boyz 1 5l",
+    "slug": "sani-prime-finalizador-dub-boyz-1-5l",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/sani_prime_finalizador_dub_boyz_15l_1_20260625221013_13167b8f318b.jpg"
+  },
+  {
+    "id": "9a126a0b-3f18-47db-af75-c1c8bc487b19",
+    "name": "Sani Sweet Finalizador Dub Boyz 1 5l",
+    "slug": "sani-sweet-finalizador-dub-boyz-1-5l",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/sani_sweet_finalizador_dub_boyz_15l_1_20260625220412_6a51bbb14bcf.jpg"
+  },
+  {
+    "id": "bb812a11-3bd4-4541-b3c8-c787309b07ca",
+    "name": "SIO2-PRO Selante Cer\u00e2mico Spray Vonixx 500ml",
+    "slug": "sio2-pro-selante-ceramico-vonixx-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/sio2_pro_manuteno_de_vitrificadores_vonixx_500_1_20251008234433_ed1a349aa328.jpg"
+  },
+  {
+    "id": "d89127e7-db18-426d-870b-dd2a8349c31e",
+    "name": "Snow Many Lava Auto Neutro Dub Boyz 1 5l",
+    "slug": "snow-many-lava-auto-neutro-dub-boyz-1-5l",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/snow_many_lava_auto_neutro_dub_boyz_15l_1_20260625215439_04b81419c1f0.jpg"
+  },
+  {
+    "id": "c992a894-242f-43d8-a367-71b8fd0808cd",
+    "name": "Tapetex Limpador para Tapetes e Carpetes Easytech 5 Litros Diluicao ate 1150",
+    "slug": "tapetex-limpador-para-tapetes-e-carpetes-easytech-5-litros-diluicao-ate-1150",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/tapetex_limpador_para_tapetes_e_carpetes_easytec_1_20250813210806_584bcd0ad06d.jpg"
+  },
+  {
+    "id": "8f407d0a-1333-4f33-aee6-aa1ce7e341f0",
+    "name": "Ultra Limpador Magil Clean 1 15 Litros Diluicao ate 1100",
+    "slug": "ultra-limpador-magil-clean-1-15-litros-diluicao-ate-1100",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/ultra_limpador_magil_clean_115_litros_diluio_at_11_1_20251103202244_ca9cd03e6f7b.jpg"
+  },
+  {
+    "id": "f4e1e241-16fe-473b-a024-8a11f94171d3",
+    "name": "Ultra Limpador Magil Clean 5 Litros Diluicao ate 1100",
+    "slug": "ultra-limpador-magil-clean-5-litros-diluicao-ate-1100",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/ultra_limpador_magil_clean_5_litros_diluio_at_1100_1_20251103201832_e4dcc182cff3.jpg"
+  },
+  {
+    "id": "c2364c8c-3bd0-4fba-ae05-39ba82961cab",
+    "name": "V80 Selante Sint\u00e9tico Vonixx 500ml",
+    "slug": "v80-selante-sintetico-vonixx-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/v80_selante_sinttico_vonixx_240ml_1_20251209154609_309c864c062c.jpg"
+  },
+  {
+    "id": "db4ba17e-25c2-4c6b-a6ed-bc0ba7ae009d",
+    "name": "V80 Selante Sinttico Vonixx 240ml",
+    "slug": "v80-selante-sintetico-vonixx-240ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/v80_selante_sinttico_vonixx_240ml_1_20251209154609_309c864c062c.jpg"
+  },
+  {
+    "id": "5570b578-f72d-45e8-97d1-ccf115267e4f",
+    "name": "Zyon Limpador Automotivo Zacs 500ml",
+    "slug": "zyon-limpador-automotivo-zacs-500ml",
+    "image_url": "https://images.tcdn.com.br/img/img_prod/1152560/zyon_limpador_automotivo_zacs_500ml_1_20260426133216_c114a538f544.jpg"
+  }
+]
