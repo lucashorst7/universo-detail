@@ -14,6 +14,7 @@
 .marketplace-card:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 .marketplace-card-logo { display: flex; align-items: center; justify-content: center; min-height: 56px; }
 .marketplace-logo-img { max-width: 130px; max-height: 56px; width: auto; height: auto; object-fit: contain; }
+.marketplace-logo-img.logo-mercadolivre { max-width: 200px; max-height: 90px; }
 .marketplace-card-name { font-size: 15px; font-weight: 700; color: var(--color-text); }
 .marketplace-card-cta { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--color-text-3); font-weight: 500; }
 .marketplace-card:hover .marketplace-card-cta { color: var(--color-text-2); }
