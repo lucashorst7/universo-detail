@@ -9,7 +9,7 @@ const MARKETPLACES = [
 ]
 
 const LOGO_URLS: Record<string, string> = {
-  mercadolivre: 'https://logospng.org/download/mercado-livre/logo-mercado-livre-1024.png',
+  mercadolivre: 'https://upload.wikimedia.org/wikipedia/pt/0/04/Logotipo_MercadoLivre.png',
   shopee: 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg',
   amazon: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
 }
@@ -21,12 +21,11 @@ const LOGO_LABELS: Record<string, string> = {
 }
 
 function MarketplaceLogo({ name }: { name: string }) {
-  const logoClass = name === 'mercadolivre' ? 'marketplace-logo-img logo-mercadolivre' : 'marketplace-logo-img'
   return (
     <img
       src={LOGO_URLS[name]}
       alt={LOGO_LABELS[name] ?? name}
-      className={logoClass}
+      className="marketplace-logo-img"
     />
   )
 }
