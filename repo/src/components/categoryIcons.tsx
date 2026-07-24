@@ -1,3 +1,0 @@
-import { Droplets, Sparkles, Wand2, Armchair, CircleDot, Eye, SprayCan, Package, type LucideIcon } from 'lucide-react';
-const map: Record<string, LucideIcon> = { 'droplets': Droplets, 'shield': Sparkles, 'sparkles': Wand2, 'armchair': Armchair, 'circle': CircleDot, 'eye': Eye, 'spray-can': SprayCan, 'shampoo': Droplets, 'shampoos-limpeza': Droplets, 'ceras-selantes': Sparkles, 'polimentos-compounds': Wand2, 'detalhamento-interno': Armchair, 'pneus-rodas': CircleDot, 'vidros-cristalizadores': Eye, 'aromatizantes-perfumes': SprayCan };
-export function getCategoryIcon(iconName: string): LucideIcon { return map[iconName?.toLowerCase()] || Package; }

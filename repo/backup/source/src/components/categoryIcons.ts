@@ -1,3 +1,0 @@
-import { Droplet, Armchair, Shield, Eye, Sparkles, CircleDot, Wrench, SprayCan, Package, Cpu, Smartphone, Headphones, Camera, Gamepad2, Monitor, Watch, Speaker, Keyboard, Mouse, Tablet, type LucideIcon } from 'lucide-react'
-const map: Record<string, LucideIcon> = { droplet:Droplet, armchair:Armchair, shield:Shield, eye:Eye, sparkles:Sparkles, 'circle-dot':CircleDot, wrench:Wrench, 'spray-can':SprayCan, package:Package, cpu:Cpu, smartphone:Smartphone, headphones:Headphones, camera:Camera, gamepad:Gamepad2, monitor:Monitor, watch:Watch, speaker:Speaker, keyboard:Keyboard, mouse:Mouse, tablet:Tablet }
-export function categoryIcon(name: string | null): LucideIcon { return (name && map[name]) || Package }
