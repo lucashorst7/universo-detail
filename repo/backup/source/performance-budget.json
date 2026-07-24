@@ -1,9 +1,0 @@
-{
-  "entryJavaScriptGzipKb": 25,
-  "stylesheetGzipKb": 12,
-  "reactVendorGzipKb": 65,
-  "supabaseVendorGzipKb": 60,
-  "lazyChunkGzipKb": 12,
-  "totalJavaScriptGzipKb": 175,
-  "totalAssetsGzipKb": 190
-}
