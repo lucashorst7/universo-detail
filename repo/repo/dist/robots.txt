@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /busca
+
+Sitemap: https://lucashorst7-papodeta-i7zd.bolt.host/sitemap.xml
