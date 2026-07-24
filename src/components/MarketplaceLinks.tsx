@@ -9,7 +9,7 @@ const MARKETPLACES = [
 ]
 
 const LOGO_URLS: Record<string, string> = {
-  mercadolivre: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Mercado_Livre_logo_%282019%29.svg',
+  mercadolivre: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/MercadoLibre_logo.PNG',
   shopee: 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg',
   amazon: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
 }
