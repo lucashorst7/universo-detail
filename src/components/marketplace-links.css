@@ -12,8 +12,8 @@
 .marketplace-card { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 24px 20px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); text-decoration: none; transition: border-color 0.15s, box-shadow 0.15s; }
 .marketplace-card:hover { border-color: var(--color-border-2); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 .marketplace-card:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
-.marketplace-card-logo { display: flex; align-items: center; justify-content: center; min-height: 40px; }
-.marketplace-card-logo svg { max-width: 120px; height: auto; }
+.marketplace-card-logo { display: flex; align-items: center; justify-content: center; min-height: 72px; }
+.marketplace-logo-img { max-width: 140px; max-height: 72px; width: auto; height: auto; object-fit: contain; }
 .marketplace-card-name { font-size: 15px; font-weight: 700; color: var(--color-text); }
 .marketplace-card-cta { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--color-text-3); font-weight: 500; }
 .marketplace-card:hover .marketplace-card-cta { color: var(--color-text-2); }
